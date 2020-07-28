@@ -12,17 +12,17 @@ public class QuickSort {
         Random random = new Random();
         int[] array = new int[length];
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(100);
+            array[i] = random.nextInt(90) + 10;
         }
-        System.out.println("array: " + Arrays.toString(array));
+        System.out.println("原始数组: " + Arrays.toString(array));
         fun(array);
-        System.out.println("       result: " + Arrays.toString(array));
+        System.out.println("排序结果: " + Arrays.toString(array));
         ArrayList<Integer> list = new ArrayList<>();
         for (int i : array) {
             list.add(i);
         }
         Collections.sort(list);
-        System.out.println("result sorted: " + list);
+        System.out.println("正确顺序: " + list);
 
     }
 
