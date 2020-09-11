@@ -2,6 +2,14 @@ package com.onysakura.algorithm.logic;
 
 public class PrintTriangleSpiral {
 
+    /**
+     * 打印出螺旋数字三角形
+     * 1
+     * 2 12
+     * 3 13 11
+     * 4 14 15 10
+     * 5  6  7  8  9
+     */
     public static void main(String[] args) {
         三角螺旋宝塔(10);
     }
