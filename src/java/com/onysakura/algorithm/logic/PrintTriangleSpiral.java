@@ -1,12 +1,12 @@
-package com.onysakura.algorithm.core;
+package com.onysakura.algorithm.logic;
 
-public class SwitchOrder {
+public class PrintTriangleSpiral {
 
     public static void main(String[] args) {
         三角螺旋宝塔(10);
     }
-    
-        /**
+
+    /**
      * 三角螺旋宝塔
      *
      * @param length 塔层数
