@@ -34,6 +34,13 @@ public class BaseNCalculator {
         return baseN;
     }
 
+    /**
+     * 将数字转换为十进制，便于计算
+     *
+     * @param source      源数字
+     * @param sourceBaseN 源数字进制
+     * @return 十进制的值
+     */
     public static long toDecimal(String source, int sourceBaseN) {
         String[] split = source.split("");
         int length = split.length;
@@ -51,6 +58,13 @@ public class BaseNCalculator {
         return result;
     }
 
+    /**
+     * 将十进制数据转为指定进制数据
+     *
+     * @param source      源数字
+     * @param targetBaseN 指定的进制
+     * @return 指定进制数字
+     */
     public static String toBaseN(long source, int targetBaseN) {
         ArrayList<String> list = new ArrayList<>();
         long res;
