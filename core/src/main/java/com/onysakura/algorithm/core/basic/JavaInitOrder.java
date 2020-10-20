@@ -1,5 +1,8 @@
 package com.onysakura.algorithm.core.basic;
 
+/**
+ * Java 类与继承关系中的代码初始化顺序
+ */
 public class JavaInitOrder {
     public static void main(String[] args) {
         new ChildClass();

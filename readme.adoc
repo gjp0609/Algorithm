@@ -1,6 +1,7 @@
 .core
 * basic 基础相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/basic/SwitchOrder.java[`SwitchOrder`] switch 的用法
+** link:./core/src/main/java/com/onysakura/algorithm/core/basic/JavaInitOrder.java[`JavaInitOrder`] 代码初始化顺序
 
 * logic 逻辑相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/logic/BaseNCalculator.java[`BaseNCalculator`] 任意进制转换
