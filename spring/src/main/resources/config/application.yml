@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: algorithm-spring
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://wsl:3306/algorithm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  servlet:
+    multipart:
+      # 指定缓存目录以防止 linux 下出现 /tmp 目录被删除时找不到对应目录的问题
+      location: /Files/yj/temp
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+logging:
+  config: classpath:config/logback-spring.xml
+
+custom:
+  # 机器 id
+  workerId: 1

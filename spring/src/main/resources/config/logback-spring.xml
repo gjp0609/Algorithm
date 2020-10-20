@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration debug="false" scan="false">
+    <springProperty scop="context" name="spring.application.name" source="spring.application.name"
+                    defaultValue="tools"/>
+    <springProfile name="dev">
+        <property name="logPath" value="/Files/yj/logs"/>
+    </springProfile>
+    <springProfile name="server">
+        <property name="logPath" value="/root/logs"/>
+    </springProfile>
+    <property name="applicationName" value="${spring.application.name}"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>
+                %green(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%4.20t] %highlight(%5level) [%green(%50.50c{50} %3.5L)] - %m %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/${applicationName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/${applicationName}/%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>
+                %green(%d{yyyy-MM-dd HH:mm:ss.SSS}) [%4.20t] %highlight(%5level) [%green(%50.50c{50} %3.5L)] - %m %n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.onysakura" level="debug"/>
+
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="file"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <root level="info">
+            <appender-ref ref="file"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="server">
+        <root level="info">
+            <appender-ref ref="file"/>
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+</configuration>
