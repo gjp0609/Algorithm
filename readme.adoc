@@ -1,20 +1,20 @@
 .core
 * basic 基础相关
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/core/SwitchOrder.java[`SwitchOrder`] switch 的用法
+** link:./core/src/main/java/com/onysakura/algorithm/core/basic/SwitchOrder.java[`SwitchOrder`] switch 的用法
 
 * logic 逻辑相关
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/logic/BaseNCalculator.java[`BaseNCalculator`] 任意进制转换
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/logic/PrintTriangleSpiral.java[`PrintTriangleSpiral`] 打印三角螺旋
+** link:./core/src/main/java/com/onysakura/algorithm/core/logic/BaseNCalculator.java[`BaseNCalculator`] 任意进制转换
+** link:./core/src/main/java/com/onysakura/algorithm/core/logic/PrintTriangleSpiral.java[`PrintTriangleSpiral`] 打印三角螺旋
 
 * security 安全加密相关
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/security/RSA.java[`RSA`] RSA 加密
+** link:./core/src/main/java/com/onysakura/algorithm/core/security/RSA.java[`RSA`] RSA 加密
 
 * `sort` 排序相关
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/sort/QuickSort.java[`QuickSort`] 快速排序
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/sort/SecondLargestNum.java[`SecondLargestNum`] 取一个数组中第二大的数字
+** link:./core/src/main/java/com/onysakura/algorithm/core/sort/QuickSort.java[`QuickSort`] 快速排序
+** link:./core/src/main/java/com/onysakura/algorithm/core/sort/SecondLargestNum.java[`SecondLargestNum`] 取一个数组中第二大的数字
 
 * thread 多线程相关
-** https://github.com/gjp0609/Algorithm/blob/master/src/java/com/onysakura/algorithm/thread/RejectedExecutionHandler.java[`RejectedExecutionHandler`] ThreadPoolExecutor 中的拒绝机制
+** link:./core/src/main/java/com/onysakura/algorithm/core/thread/RejectedExecutionHandler.java[`RejectedExecutionHandler`] ThreadPoolExecutor 中的拒绝机制
 
 .spring
 * link:./spring/src/test/java/com/onysakura/algorithm/spring/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
