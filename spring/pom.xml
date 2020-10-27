@@ -15,6 +15,8 @@
 
     <properties>
         <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <springboot.version>2.3.4.RELEASE</springboot.version>
     </properties>
 
@@ -72,6 +74,13 @@
             </resource>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <!-- 额外的资源配置 -->
+            <resource>
+                <directory>${basedir}/src/main/webapp</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
