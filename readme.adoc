@@ -1,21 +1,29 @@
 .core
-* basic 基础相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/basic/SwitchOrder.java[`SwitchOrder`] switch 的用法
+* `basic` 基础相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/basic/JavaInitOrder.java[`JavaInitOrder`] 代码初始化顺序
+** link:./core/src/main/java/com/onysakura/algorithm/core/basic/SwitchOrder.java[`SwitchOrder`] switch 的用法
 
-* logic 逻辑相关
+* `logic` 逻辑相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/logic/BaseNCalculator.java[`BaseNCalculator`] 任意进制转换
 ** link:./core/src/main/java/com/onysakura/algorithm/core/logic/PrintTriangleSpiral.java[`PrintTriangleSpiral`] 打印三角螺旋
 
-* security 安全加密相关
+* `security` 安全加密相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/security/RSA.java[`RSA`] RSA 加密
 
 * `sort` 排序相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/sort/QuickSort.java[`QuickSort`] 快速排序
 ** link:./core/src/main/java/com/onysakura/algorithm/core/sort/SecondLargestNum.java[`SecondLargestNum`] 取一个数组中第二大的数字
 
-* thread 多线程相关
+* `thread` 多线程相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/thread/RejectedExecutionHandler.java[`RejectedExecutionHandler`] ThreadPoolExecutor 中的拒绝机制
 
 .spring
-* link:./spring/src/test/java/com/onysakura/algorithm/spring/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
+* `redis` Redis相关
+** link:./spring/src/test/java/com/onysakura/algorithm/spring/redis/LockTest.java[`LockTest`] Redis 实现分布式锁
+* `transaction` 事务相关
+** link:./spring/src/test/java/com/onysakura/algorithm/spring/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
+
+.leetcode
+1. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_1/Main.java[`two sum`] 两数之和
+2. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_2/Main.java[`add two numbers`] 两数相加
+3. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_3/Main.java[`longest substring without repeating characters`] 无重复字符的最长子串

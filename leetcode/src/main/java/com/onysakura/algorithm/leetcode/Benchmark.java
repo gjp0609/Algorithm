@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.core;
+package com.onysakura.algorithm.leetcode;
 
 import java.util.HashMap;
 

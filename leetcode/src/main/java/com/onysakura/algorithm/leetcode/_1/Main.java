@@ -1,6 +1,6 @@
-package com.onysakura.algorithm.core._1;
+package com.onysakura.algorithm.leetcode._1;
 
-import com.onysakura.algorithm.core.Benchmark;
+import com.onysakura.algorithm.leetcode.Benchmark;
 
 import java.util.HashMap;
 import java.util.Map;

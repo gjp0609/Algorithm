@@ -1,6 +1,6 @@
-package com.onysakura.algorithm.core._2;
+package com.onysakura.algorithm.leetcode._2;
 
-import com.onysakura.algorithm.core.Benchmark;
+import com.onysakura.algorithm.leetcode.Benchmark;
 
 import java.math.BigInteger;
 import java.util.Random;
