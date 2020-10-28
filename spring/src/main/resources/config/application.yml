@@ -17,6 +17,11 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+  redis:
+    cluster:
+      nodes: localhost:21000,localhost:21001,localhost:21002,localhost:21003,localhost:21004,localhost:21005
+#    host: localhost
+#    port: 21000
 
 logging:
   config: classpath:config/logback-spring.xml
