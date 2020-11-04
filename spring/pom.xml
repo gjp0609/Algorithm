@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring</artifactId>
-    <version>0.0.1</version>
+    <version>0.1</version>
     <name>algorithm-spring</name>
     <description>Algorithm Spring</description>
 
     <parent>
         <artifactId>algorithm</artifactId>
         <groupId>com.onysakura</groupId>
-        <version>0.0.1</version>
+        <version>0.1</version>
     </parent>
 
     <properties>
