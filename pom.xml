@@ -13,6 +13,7 @@
         <module>core</module>
         <module>leetcode</module>
         <module>spring</module>
+        <module>spring-cloud</module>
     </modules>
 
     <properties>
