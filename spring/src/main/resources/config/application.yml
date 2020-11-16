@@ -11,21 +11,24 @@ spring:
   servlet:
     multipart:
       # 指定缓存目录以防止 linux 下出现 /tmp 目录被删除时找不到对应目录的问题
-      location: /Files/yj/temp
+      location: /Files/Temp
   jpa:
-    show-sql: true
+    show-sql: true # 日志打印 sql
     generate-ddl: true
     hibernate:
       ddl-auto: update
+    open-in-view: false # 建议关闭
   redis:
-    cluster:
+    cluster: # 集群
       nodes: localhost:21000,localhost:21001,localhost:21002,localhost:21003,localhost:21004,localhost:21005
-#    host: localhost
+#    host: localhost # 单体
 #    port: 21000
 
 logging:
   config: classpath:config/logback-spring.xml
+  file:
+    path: /Files/logs/algorithm
 
 custom:
   # 机器 id
-  workerId: 1
+  workerId: 1 # 启动时通过 --custom.workerId=2 参数指定机器 id

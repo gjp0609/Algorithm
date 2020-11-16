@@ -5,6 +5,8 @@ import com.onysakura.algorithm.spring.jpa.id.uidGenerator.exception.UidGenerateE
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +15,8 @@ import java.io.Serializable;
 
 @Component
 public class IdGenerator implements IdentifierGenerator {
+
+    private final Logger log = LoggerFactory.getLogger(IdGenerator.class);
 
     public static UidGenerator uidGenerator;
 
@@ -24,6 +28,7 @@ public class IdGenerator implements IdentifierGenerator {
         if (workerId == null) {
             workerId = 0L;
         }
+        log.debug("worker id: {}", workerId);
         uidGenerator = UidGenerator.getUidGenerator(workerId);
     }
 
