@@ -84,4 +84,19 @@ public class TransactionTest {
         print();
         log.info("\033[35m -------------------- supports_required -------------------- \033[0m");
     }
+
+    @Test
+    public void required_null() {
+        log.info("\033[35m -------------------- required_null -------------------- \033[0m");
+        try {
+            log.info("外层 required，内层不加注解，");
+            transactionTestService.required_null(1L);
+        } catch (UnexpectedRollbackException e) {
+            log.info("error");
+        }
+        print();
+        log.info("\033[35m -------------------- required_null -------------------- \033[0m");
+    }
+
+
 }
