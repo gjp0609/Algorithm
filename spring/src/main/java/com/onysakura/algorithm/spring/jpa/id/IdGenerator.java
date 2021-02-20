@@ -20,7 +20,7 @@ public class IdGenerator implements IdentifierGenerator {
 
     public static UidGenerator uidGenerator;
 
-    @Value("${custom.workerId}")
+    @Value("${custom.worker-id}")
     private Long workerId;
 
     @PostConstruct

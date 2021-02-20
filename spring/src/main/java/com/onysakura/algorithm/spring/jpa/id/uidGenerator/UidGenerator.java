@@ -40,8 +40,24 @@ public interface UidGenerator {
      */
     String parseUID(long uid);
 
+    /**
+     * 最大支持 4096 个实例
+     *
+     * @param workerId 0 ~ 4095
+     */
     static UidGenerator getUidGenerator(Long workerId) {
         return new DefaultUidGenerator(workerId);
     }
 
+    /**
+     * 最大支持 4096 个实例，共 12 位，取前 5 位作机器 id，后 7 位作业务id
+     *
+     * @param machineId  0 ~ 31
+     * @param businessId 0 ~ 127
+     */
+    static UidGenerator getUidGenerator(Long machineId, Long businessId) {
+        long workerId = (machineId << 7) + businessId;
+        System.out.println(workerId);
+        return new DefaultUidGenerator(workerId);
+    }
 }

@@ -18,8 +18,7 @@ package com.onysakura.algorithm.spring.jpa.id.uidGenerator.impl;
 import com.onysakura.algorithm.spring.jpa.id.uidGenerator.BitsAllocator;
 import com.onysakura.algorithm.spring.jpa.id.uidGenerator.UidGenerator;
 import com.onysakura.algorithm.spring.jpa.id.uidGenerator.exception.UidGenerateException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -53,8 +52,8 @@ import java.util.concurrent.TimeUnit;
  *
  * @author yutianbao
  */
+@Slf4j
 public class DefaultUidGenerator implements UidGenerator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultUidGenerator.class);
 
     /**
      * Bits allocate
@@ -87,7 +86,7 @@ public class DefaultUidGenerator implements UidGenerator {
         if (workerId > bitsAllocator.getMaxWorkerId()) {
             throw new RuntimeException("Worker id " + workerId + " exceeds the max " + bitsAllocator.getMaxWorkerId());
         }
-        LOGGER.info("Initialized bits(1, {}, {}, {}) for workerID:{}", timeBits, workerBits, seqBits, workerId);
+        log.info("Initialized bits(1, {}, {}, {}) for workerID:{}", timeBits, workerBits, seqBits, workerId);
     }
 
 
@@ -96,7 +95,7 @@ public class DefaultUidGenerator implements UidGenerator {
         try {
             return nextId();
         } catch (Exception e) {
-            LOGGER.error("Generate unique id exception. ", e);
+            log.error("Generate unique id exception. ", e);
             throw new UidGenerateException(e);
         }
     }
