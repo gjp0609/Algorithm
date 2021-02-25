@@ -8,7 +8,7 @@
 ** link:./core/src/main/java/com/onysakura/algorithm/core/logic/PrintTriangleSpiral.java[`PrintTriangleSpiral`] 打印三角螺旋
 
 * `security` 安全加密相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/security/RSA.java[`RSA`] RSA 加密
+** link:./core/src/main/java/com/onysakura/algorithm/core/security/rsa/RSA.java[`RSA`] RSA 加密
 
 * `sort` 排序相关
 ** link:./core/src/main/java/com/onysakura/algorithm/core/sort/QuickSort.java[`QuickSort`] 快速排序
