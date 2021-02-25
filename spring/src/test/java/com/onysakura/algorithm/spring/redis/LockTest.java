@@ -1,5 +1,6 @@
 package com.onysakura.algorithm.spring.redis;
 
+import com.onysakura.algorithm.spring.SingleApplication;
 import com.onysakura.algorithm.spring.transaction.TransactionTest;
 import com.onysakura.algorithm.spring.utils.Benchmark;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-@SpringBootTest
+@SpringBootTest(classes = SingleApplication.class)
 public class LockTest {
 
     private final Logger log = LoggerFactory.getLogger(TransactionTest.class);

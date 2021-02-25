@@ -34,3 +34,5 @@ server:
 custom:
   # 机器 id
   worker-id: 1 # 启动时通过 --custom.worker-id=2 参数指定机器 id
+  jwt:
+    signing-key: asdasdasd
