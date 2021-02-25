@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>cloud-service</artifactId>
+    <artifactId>cloud-platform</artifactId>
     <version>0.1</version>
-    <name>cloud-service</name>
-    <description>Spring Cloud Service</description>
+    <name>cloud-platform</name>
+    <description>Spring Cloud Platform</description>
     <packaging>pom</packaging>
 
     <parent>
@@ -15,7 +15,6 @@
     </parent>
 
     <modules>
-        <module>cloud-service-user</module>
-        <module>cloud-service-manager</module>
+        <module>cloud-platform-gateway</module>
     </modules>
 </project>

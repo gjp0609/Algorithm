@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: ${artifactId}
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        group: ${spring.profiles.active}
+        shared-configs: # 共享配置
+          - data-id: ${artifactId}.yml
+            group: ${spring.profiles.active}
+          - data-id: common.yml
+            refresh: true # 动态刷新
+            group: ${spring.profiles.active}
+          - data-id: db.yml
+            group: ${spring.profiles.active}
+          - data-id: redis.yml
+            group: ${spring.profiles.active}
+          - data-id: mq.yml
+            group: ${spring.profiles.active}
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.namespace}
+        group: ${spring.profiles.active}
+  profiles:
+    active: @spring.active@
+logging:
+  config: classpath:config/logback-spring.xml
+  file:
+    path: /Files/logs/algorithm/spring-cloud/cloud-platform
+
+cloud-service-user-server:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.onysakura.cloud.common.configuration.NacosWeightedRule
+
+custom:
+  machine-id: 0
+  business-id: 1

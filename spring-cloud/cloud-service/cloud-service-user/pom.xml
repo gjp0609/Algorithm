@@ -5,8 +5,8 @@
     <artifactId>cloud-service-user</artifactId>
     <version>0.1</version>
     <name>cloud-service-user</name>
-    <description>Spring Cloud Common</description>
-    <packaging>jar</packaging>
+    <description>Spring Cloud User Service</description>
+    <packaging>pom</packaging>
 
     <parent>
         <artifactId>cloud-service</artifactId>
@@ -14,26 +14,8 @@
         <version>0.1</version>
     </parent>
 
-    <properties>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-    </dependencies>
-
+    <modules>
+        <module>cloud-service-user-api</module>
+        <module>cloud-service-user-server</module>
+    </modules>
 </project>
