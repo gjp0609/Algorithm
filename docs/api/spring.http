@@ -1,0 +1,57 @@
+#################### auth
+
+### login
+POST {{single_url}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+### refresh
+GET {{single_url}}/auth/refresh
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjoiQURNSU4iLCJjcmVhdGVkIjoxNjE0MjE4MzI0NTI4LCJpc3MiOiJodHRwczovL29ueXNha3VyYS5jb20iLCJpYXQiOjE2MTQyMTgzMjQsImV4cCI6MTYxNDIxODc1Nn0.k3ErQIthUDngbXTNpS6eJQim8-XOF39gOopeEu8YEsI
+
+###
+GET {{single_url}}/test/get?param=1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjoiQURNSU4iLCJjcmVhdGVkIjoxNjE0MjE4MzMzOTQzLCJpc3MiOiJodHRwczovL29ueXNha3VyYS5jb20iLCJpYXQiOjE2MTQyMTgzMzMsImV4cCI6MTYxNDIxODc2NX0.JweHCFtMEsPw1vt_aO-5k-8Z4zJ_SP2o2YTPNb36UcQ
+
+###
+POST {{single_url}}/test/post
+Content-Type: application/x-www-form-urlencoded
+
+asd=Asd&as=1231
+
+###
+GET {{single_url}}/test/testThread?time=111
+Authorization: Bearer YWRtaW46MTIzNDU2
+
+### user add
+GET {{single_url}}/user/add?username=test&password=123456
+
+### login
+POST {{single_url}}/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+### user enable
+GET {{single_url}}/user/enable?username=user&enable=false
+
+################# tools
+
+### api get
+GET {{single_url}}/api/asdf
+
+### api redirect
+GET {{single_url}}/api/asdf
+
+### api put
+GET {{single_url}}/api/
+Content-Type: text/plain
+
+http://spring.algorithm.onysakura.com/api/asdf
