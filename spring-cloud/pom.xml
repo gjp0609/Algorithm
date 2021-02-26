@@ -85,8 +85,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-                <type>jar</type>
-                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.onysakura</groupId>
