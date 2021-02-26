@@ -1,0 +1,8 @@
+### info
+GET http://127.0.0.1:30300/user/info
+
+###
+GET http://127.0.0.1:30300/route/refresh
+
+###
+GET http://127.0.0.1:30300/user/test/rp?ppp=213
