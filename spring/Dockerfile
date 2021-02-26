@@ -1,4 +1,4 @@
 FROM openjdk:11-jre-slim-buster
 VOLUME /Files
-ADD ./target/spring-0.1.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+ADD ./target/spring.jar app.jar
+ENTRYPOINT ["java", "-jar", "/data/app.jar"]
