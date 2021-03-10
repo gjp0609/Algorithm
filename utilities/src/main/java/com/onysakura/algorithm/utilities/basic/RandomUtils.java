@@ -13,6 +13,10 @@ public class RandomUtils {
         return randomStr(count, StrType.NUMBER);
     }
 
+    public static int randomInt(int bound) {
+        return RANDOM.nextInt(bound);
+    }
+
     public static String randomStr(int count) {
         return randomStr(count, StrType.NUMBER, StrType.STRING, StrType.STRING_UPPERCASE);
     }

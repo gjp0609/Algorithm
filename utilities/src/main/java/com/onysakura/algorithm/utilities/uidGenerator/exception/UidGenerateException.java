@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.onysakura.algorithm.spring.jpa.id.uidGenerator.exception;
+package com.onysakura.algorithm.utilities.uidGenerator.exception;
 
 /**
  * UidGenerateException

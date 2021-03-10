@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.spring.transaction;
+package com.onysakura.algorithm.spring.database.transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
