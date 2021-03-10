@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.spring.transaction;
+package com.onysakura.algorithm.spring.database.transaction;
 
 import lombok.Data;
 import lombok.ToString;

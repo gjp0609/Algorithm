@@ -1,8 +1,8 @@
 package com.onysakura.cloud.common.data;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
+import com.onysakura.algorithm.utilities.uidGenerator.UidGenerator;
 import com.onysakura.cloud.common.properties.ApplicationInfo;
-import com.onysakura.cloud.common.utils.uidGenerator.UidGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

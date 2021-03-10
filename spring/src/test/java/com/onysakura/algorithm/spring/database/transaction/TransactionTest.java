@@ -1,6 +1,6 @@
-package com.onysakura.algorithm.spring.transaction;
+package com.onysakura.algorithm.spring.database.transaction;
 
-import com.onysakura.algorithm.spring.jpa.id.uidGenerator.UidGenerator;
+import com.onysakura.algorithm.spring.jpa.id.IdGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -25,13 +25,14 @@ public class TransactionTest {
     private TransactionTestRepository transactionTestRepository;
     @Autowired
     private TransactionTestService transactionTestService;
+    @Autowired
+    private IdGenerator idGenerator;
 
-    private static final UidGenerator uidGenerator = UidGenerator.getUidGenerator(0L);
     private long testNo;
 
     @BeforeEach
     public void before() {
-        testNo = uidGenerator.getUID();
+        testNo = idGenerator.getUID();
     }
 
     public void print() {

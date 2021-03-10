@@ -1,7 +1,7 @@
 package com.onysakura.algorithm.spring.jpa.id;
 
-import com.onysakura.algorithm.spring.jpa.id.uidGenerator.UidGenerator;
-import com.onysakura.algorithm.spring.jpa.id.uidGenerator.exception.UidGenerateException;
+import com.onysakura.algorithm.utilities.uidGenerator.UidGenerator;
+import com.onysakura.algorithm.utilities.uidGenerator.exception.UidGenerateException;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
@@ -39,6 +39,10 @@ public class IdGenerator implements IdentifierGenerator {
         } catch (UidGenerateException ignored) {
         }
         return null;
+    }
+
+    public long getUID() {
+        return uidGenerator.getUID();
     }
 
 }

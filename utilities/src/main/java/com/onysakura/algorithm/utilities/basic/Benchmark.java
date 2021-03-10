@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.spring.utils;
+package com.onysakura.algorithm.utilities.basic;
 
 import java.util.HashMap;
 

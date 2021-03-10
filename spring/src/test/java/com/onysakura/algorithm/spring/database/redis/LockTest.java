@@ -1,8 +1,8 @@
-package com.onysakura.algorithm.spring.redis;
+package com.onysakura.algorithm.spring.database.redis;
 
 import com.onysakura.algorithm.spring.SingleApplication;
-import com.onysakura.algorithm.spring.transaction.TransactionTest;
-import com.onysakura.algorithm.spring.utils.Benchmark;
+import com.onysakura.algorithm.spring.database.transaction.TransactionTest;
+import com.onysakura.algorithm.utilities.basic.Benchmark;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

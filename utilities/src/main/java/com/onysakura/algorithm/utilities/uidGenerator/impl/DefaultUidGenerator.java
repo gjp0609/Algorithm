@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.onysakura.algorithm.spring.jpa.id.uidGenerator.impl;
+package com.onysakura.algorithm.utilities.uidGenerator.impl;
 
-import com.onysakura.algorithm.spring.jpa.id.uidGenerator.BitsAllocator;
-import com.onysakura.algorithm.spring.jpa.id.uidGenerator.UidGenerator;
-import com.onysakura.algorithm.spring.jpa.id.uidGenerator.exception.UidGenerateException;
+import com.onysakura.algorithm.utilities.uidGenerator.BitsAllocator;
+import com.onysakura.algorithm.utilities.uidGenerator.UidGenerator;
+import com.onysakura.algorithm.utilities.uidGenerator.exception.UidGenerateException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
 
 /**
  * Represents an implementation of {@link UidGenerator}

@@ -1,6 +1,6 @@
-package com.onysakura.algorithm.spring.jpa.id.uidGenerator;
+package com.onysakura.algorithm.utilities.uidGenerator;
 
-import org.springframework.util.Assert;
+import com.onysakura.algorithm.utilities.basic.Assert;
 
 /**
  * Allocate 64 bits for the UID(long)<br>
@@ -42,6 +42,7 @@ public class BitsAllocator {
     public BitsAllocator(int timestampBits, int workerIdBits, int sequenceBits) {
         // make sure allocated 64 bits
         int allocateTotalBits = signBits + timestampBits + workerIdBits + sequenceBits;
+        
         Assert.isTrue(allocateTotalBits == TOTAL_BITS, "allocate not enough 64 bits");
 
         // initialize bits
