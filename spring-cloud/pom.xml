@@ -103,17 +103,17 @@
             <dependency>
                 <groupId>com.onysakura</groupId>
                 <artifactId>utilities</artifactId>
-                <version>${project.all.version}</version>
+                <version>0.1</version>
             </dependency>
             <dependency>
                 <groupId>com.onysakura</groupId>
                 <artifactId>cloud-common-base</artifactId>
-                <version>${project.all.version}</version>
+                <version>0.1</version>
             </dependency>
             <dependency>
                 <groupId>com.onysakura</groupId>
                 <artifactId>cloud-common-data</artifactId>
-                <version>${project.all.version}</version>
+                <version>0.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
