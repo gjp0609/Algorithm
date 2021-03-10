@@ -37,7 +37,6 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
         <!-- Tools-->
-        <lombok.version>1.18.18</lombok.version>
         <fastjson.version>1.2.75</fastjson.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <mysql-connector.version>8.0.23</mysql-connector.version>
@@ -82,21 +81,6 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.onysakura</groupId>
-                <artifactId>cloud-common-base</artifactId>
-                <version>0.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.onysakura</groupId>
-                <artifactId>cloud-common-data</artifactId>
-                <version>0.1</version>
-            </dependency>
-            <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
@@ -115,6 +99,21 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.onysakura</groupId>
+                <artifactId>utilities</artifactId>
+                <version>${project.all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.onysakura</groupId>
+                <artifactId>cloud-common-base</artifactId>
+                <version>${project.all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.onysakura</groupId>
+                <artifactId>cloud-common-data</artifactId>
+                <version>${project.all.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
