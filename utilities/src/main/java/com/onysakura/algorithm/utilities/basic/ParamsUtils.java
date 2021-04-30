@@ -96,15 +96,16 @@ public class ParamsUtils {
         if (obj == null) {
             return null;
         }
-        Map<String, String> map = new HashMap<>();
         try {
+            Map<String, String> map = new HashMap<>();
             JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(obj));
             for (String key : jsonObject.keySet()) {
                 map.put(key, jsonObject.getString(key));
             }
+            return map;
         } catch (Exception e) {
-            log.error("beanToMapStr Error:{}", e.getMessage(), e);
+            log.error("object to map error", e);
+            return null;
         }
-        return map;
     }
 }

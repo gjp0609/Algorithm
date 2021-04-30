@@ -96,7 +96,7 @@ public class DefaultUidGenerator implements UidGenerator {
         try {
             return nextId();
         } catch (Exception e) {
-            log.error("Generate unique id exception. ", e);
+            log.error("Generate unique id exception", e);
             throw new UidGenerateException(e);
         }
     }

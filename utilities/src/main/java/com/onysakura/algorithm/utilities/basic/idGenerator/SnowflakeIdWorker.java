@@ -101,8 +101,6 @@ public class SnowflakeIdWorker {
         this.businessId = businessId;
     }
 
-    // ==============================Methods==========================================
-
     /**
      * 获得下一个ID (该方法是线程安全的)
      *
@@ -135,9 +133,9 @@ public class SnowflakeIdWorker {
         lastTimestamp = timestamp;
 
         //移位并通过或运算拼到一起组成64位的ID
-        return ((timestamp - epochSeconds) << timestampLeftShift) //
-                | (businessId << businessIdShift) //
-                | (machineId << machineIdShift) //
+        return ((timestamp - epochSeconds) << timestampLeftShift)
+                | (businessId << businessIdShift)
+                | (machineId << machineIdShift)
                 | sequence;
     }
 
@@ -162,11 +160,5 @@ public class SnowflakeIdWorker {
      */
     protected long timeGen() {
         return System.currentTimeMillis();
-    }
-
-    public static void main(String[] args) {
-        SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(1, 1);
-        long l = snowflakeIdWorker.nextId();
-        System.out.println(Long.toBinaryString(l));
     }
 }

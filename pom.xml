@@ -11,10 +11,11 @@
 
     <modules>
         <module>core</module>
-        <module>utilities</module>
         <module>leetcode</module>
         <module>spring</module>
         <module>spring-cloud</module>
+        <module>tools</module>
+        <module>utilities</module>
     </modules>
 
     <properties>

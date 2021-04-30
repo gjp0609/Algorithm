@@ -1,6 +1,6 @@
 package com.onysakura.algorithm.core.socket.tcp;
 
-import com.onysakura.algorithm.core.utils.Benchmark;
+import com.onysakura.algorithm.utilities.basic.Benchmark;
 
 import java.net.Socket;
 

@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({Exception.class})
     public Result<?> exception(Exception e, HttpServletRequest request, HttpServletResponse response) {
-        log.warn("GlobalException: {}", e.getMessage());
+        log.warn("GlobalException", e);
         return Result.fail();
     }
 }

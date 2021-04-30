@@ -23,6 +23,11 @@
             <artifactId>bcprov-jdk16</artifactId>
             <version>1.46</version>
         </dependency>
+        <dependency>
+            <groupId>com.onysakura</groupId>
+            <artifactId>utilities</artifactId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
 
 </project>
