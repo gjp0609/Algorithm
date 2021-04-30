@@ -3,7 +3,7 @@ package com.onysakura.algorithm.spring.database.index;
 import com.onysakura.algorithm.spring.SingleApplication;
 import com.onysakura.algorithm.spring.jpa.id.IdGenerator;
 import com.onysakura.algorithm.utilities.basic.Benchmark;
-import com.onysakura.algorithm.utilities.basic.RandomUtils;
+import com.onysakura.algorithm.utilities.basic.str.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,11 +35,11 @@ public class TestIndex {
             model.setStr(RandomUtils.randomStr(20));
             long now = System.currentTimeMillis() / 1000;
             long lastYear = now - 60 * 60 * 24 * 365;
-            LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(RandomUtils.randomInt((int) (now - lastYear)) + lastYear, 0, ZoneOffset.ofHours(8));
+            LocalDateTime localDateTime = LocalDateTime.ofEpochSecond(RandomUtils.nextInt((int) (now - lastYear)) + lastYear, 0, ZoneOffset.ofHours(8));
             model.setDate(localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             model.setType(RandomUtils.nextBoolean() ? Type.A : Type.B);
-            model.setNum(RandomUtils.randomInt(10));
-            model.setText(RandomUtils.randomInt(10) > 8 ? RandomUtils.randomStr(2000) : null);
+            model.setNum(RandomUtils.nextInt(10));
+            model.setText(RandomUtils.nextInt(10) > 8 ? RandomUtils.randomStr(2000) : null);
             models.add(model);
         }
         return models;

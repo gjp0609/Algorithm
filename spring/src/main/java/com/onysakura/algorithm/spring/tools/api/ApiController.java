@@ -1,6 +1,6 @@
 package com.onysakura.algorithm.spring.tools.api;
 
-import com.onysakura.algorithm.utilities.basic.RandomUtils;
+import com.onysakura.algorithm.utilities.basic.str.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

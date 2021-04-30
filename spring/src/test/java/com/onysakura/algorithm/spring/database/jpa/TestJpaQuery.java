@@ -5,7 +5,7 @@ import com.onysakura.algorithm.spring.jpa.query.JpaQueryRepository;
 import com.onysakura.algorithm.spring.jpa.query.JpaQueryModel;
 import com.onysakura.algorithm.spring.jpa.query.Type;
 import com.onysakura.algorithm.utilities.basic.Benchmark;
-import com.onysakura.algorithm.utilities.basic.RandomUtils;
+import com.onysakura.algorithm.utilities.basic.str.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +25,12 @@ public class TestJpaQuery {
     public void init() {
         for (int i = 0; i < 10000; i++) {
             JpaQueryModel model = new JpaQueryModel();
-            model.setStr(RandomUtils.randomStr(RandomUtils.randomInt(100) + 10));
+            model.setStr(RandomUtils.randomStr(RandomUtils.nextInt(100) + 10));
             long now = System.currentTimeMillis() / 1000;
             long lastYear = now - 60 * 60 * 24 * 365;
-            model.setDate(new Date(1000L * (RandomUtils.randomInt((int) (now - lastYear)) + lastYear)));
+            model.setDate(new Date(1000L * (RandomUtils.nextInt((int) (now - lastYear)) + lastYear)));
             model.setType(RandomUtils.nextBoolean() ? Type.A : Type.B);
-            model.setNum(RandomUtils.randomInt(10));
+            model.setNum(RandomUtils.nextInt(10));
             model.setText(RandomUtils.randomStr(1000));
             jpaQueryRepository.save(model);
         }

@@ -165,7 +165,7 @@ public class Main {
 
 
     public static BigInteger buildNum(ListNode listNode) {
-        StringBuilder num = new StringBuilder();
+        StringBuffer num = new StringBuffer();
         do {
             num.insert(0, listNode.val);
             listNode = listNode.next;
