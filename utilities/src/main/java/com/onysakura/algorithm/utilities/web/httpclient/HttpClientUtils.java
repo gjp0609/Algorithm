@@ -3,7 +3,7 @@ package com.onysakura.algorithm.utilities.web.httpclient;
 import com.alibaba.fastjson.JSON;
 import com.onysakura.algorithm.utilities.basic.str.RandomUtils;
 import com.onysakura.algorithm.utilities.basic.str.StringUtils;
-import com.onysakura.algorithm.utilities.basic.str.XmlUtils;
+import com.onysakura.algorithm.utilities.basic.XmlUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -181,7 +181,7 @@ public class HttpClientUtils {
                     ds.flush();
                     break;
                 case APPLICATION_FORM_URLENCODED:
-                    StringBuilder postData = new StringBuilder();
+                    StringBuffer postData = new StringBuffer();
                     for (Map.Entry<String, String> param : postParam.getBody().entrySet()) {
                         if (postData.length() != 0) postData.append('&');
                         postData.append(URLEncoder.encode(param.getKey(), charset.name()));

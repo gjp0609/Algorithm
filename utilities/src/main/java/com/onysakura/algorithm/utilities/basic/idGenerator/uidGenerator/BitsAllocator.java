@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.utilities.uidGenerator;
+package com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator;
 
 import com.onysakura.algorithm.utilities.basic.Assert;
 

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.onysakura.algorithm.utilities.uidGenerator.impl;
+package com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.impl;
 
-import com.onysakura.algorithm.utilities.uidGenerator.BitsAllocator;
-import com.onysakura.algorithm.utilities.uidGenerator.UidGenerator;
-import com.onysakura.algorithm.utilities.uidGenerator.exception.UidGenerateException;
+import com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.BitsAllocator;
+import com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.UidGenerator;
+import com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.exception.UidGenerateException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
@@ -79,7 +79,7 @@ public class DefaultUidGenerator implements UidGenerator {
 
 
     /**
-     * @param workerId 机器 id
+     * @param workerId 实例 id
      */
     public DefaultUidGenerator(long workerId) {
         this.workerId = workerId;
@@ -92,7 +92,7 @@ public class DefaultUidGenerator implements UidGenerator {
 
 
     @Override
-    public long getUID() throws UidGenerateException {
+    public synchronized long getUID() throws UidGenerateException {
         try {
             return nextId();
         } catch (Exception e) {

@@ -1,9 +1,16 @@
-package com.onysakura.algorithm.utilities.web;
+package com.onysakura.algorithm.utilities.basic;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.onysakura.algorithm.utilities.basic.str.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
+@Slf4j
 @SuppressWarnings("unused")
 public class ParamsUtils {
 
@@ -78,5 +85,26 @@ public class ParamsUtils {
             result.put(key, value);
         }
         return result;
+    }
+
+    /**
+     * 对象转 map
+     *
+     * @param obj 待转换对象
+     */
+    public static Map<String, String> toMap(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        Map<String, String> map = new HashMap<>();
+        try {
+            JSONObject jsonObject = JSON.parseObject(JSON.toJSONString(obj));
+            for (String key : jsonObject.keySet()) {
+                map.put(key, jsonObject.getString(key));
+            }
+        } catch (Exception e) {
+            log.error("beanToMapStr Error:{}", e.getMessage(), e);
+        }
+        return map;
     }
 }

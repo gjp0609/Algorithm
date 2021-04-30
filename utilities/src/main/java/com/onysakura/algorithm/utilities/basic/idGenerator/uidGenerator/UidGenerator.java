@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.onysakura.algorithm.utilities.uidGenerator;
+package com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator;
 
-import com.onysakura.algorithm.utilities.uidGenerator.exception.UidGenerateException;
-import com.onysakura.algorithm.utilities.uidGenerator.impl.DefaultUidGenerator;
+import com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.exception.UidGenerateException;
+import com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.impl.DefaultUidGenerator;
 
 /**
  * Represents a unique id generator.
@@ -52,11 +52,11 @@ public interface UidGenerator {
     /**
      * 最大支持 4096 个实例，共 12 位，取前 5 位作机器 id，后 7 位作业务id
      *
-     * @param machineId  0 ~ 31
-     * @param businessId 0 ~ 127
+     * @param machineId 机器 id: 0 ~ 31
+     * @param businessId 业务 id: 0 ~ 127
      */
     static UidGenerator getUidGenerator(Long machineId, Long businessId) {
         long workerId = (machineId << 7) + businessId;
-        return new DefaultUidGenerator(workerId);
+        return getUidGenerator(workerId);
     }
 }
