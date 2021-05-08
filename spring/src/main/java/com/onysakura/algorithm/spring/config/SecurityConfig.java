@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/user/**").hasRole("ADMIN")
 //                .antMatchers("/api/**").hasRole("USER")
-                .antMatchers("/auth/login", "/test/**").permitAll()
+                .antMatchers("/auth/login", "/test/**", "/files/**", "/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // 添加一个过滤器验证其他请求的Token是否合法
