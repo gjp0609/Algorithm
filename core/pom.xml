@@ -20,8 +20,8 @@
     <dependencies>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk16</artifactId>
-            <version>1.46</version>
+            <artifactId>bcprov-jdk15to18</artifactId>
+            <version>1.68</version>
         </dependency>
         <dependency>
             <groupId>com.onysakura</groupId>
