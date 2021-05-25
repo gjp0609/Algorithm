@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.utilities.db.sqlite;
+package com.onysakura.algorithm.utilities.db.anno;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

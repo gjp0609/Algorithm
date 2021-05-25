@@ -2,6 +2,8 @@ package com.onysakura.algorithm.utilities.db.sqlite;
 
 import com.onysakura.algorithm.utilities.basic.idGenerator.IdUtils;
 import com.onysakura.algorithm.utilities.basic.str.StringUtils;
+import com.onysakura.algorithm.utilities.db.anno.TableName;
+import com.onysakura.algorithm.utilities.db.enums.Sort;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
@@ -78,13 +80,13 @@ public class BaseRepository<T> {
         return getResultList(resultSet, modelClass);
     }
 
-    public List<T> selectAll(LinkedHashMap<String, SQLite.Sort> sort) {
+    public List<T> selectAll(LinkedHashMap<String, Sort> sort) {
         if (sort == null || sort.isEmpty()) {
             return selectAll();
         }
         String sql = "SELECT * FROM $TABLE_NAME ORDER BY $ORDER;";
         ArrayList<String> order = new ArrayList<>();
-        for (Map.Entry<String, SQLite.Sort> sortEntry : sort.entrySet()) {
+        for (Map.Entry<String, Sort> sortEntry : sort.entrySet()) {
             order.add(StringUtils.humpToUnderline(sortEntry.getKey()) + " " + sortEntry.getValue().toString());
         }
         sql = sql.replace("$TABLE_NAME", tableName)
@@ -120,7 +122,7 @@ public class BaseRepository<T> {
         return getResultList(resultSet, modelClass);
     }
 
-    public List<T> select(T model, LinkedHashMap<String, SQLite.Sort> sort) {
+    public List<T> select(T model, LinkedHashMap<String, Sort> sort) {
         if (sort == null || sort.isEmpty()) {
             return select(model);
         }
@@ -143,7 +145,7 @@ public class BaseRepository<T> {
         }
         String sql = "SELECT * FROM $TABLE_NAME WHERE $QUERIES ORDER BY $ORDER;";
         ArrayList<String> order = new ArrayList<>();
-        for (Map.Entry<String, SQLite.Sort> sortEntry : sort.entrySet()) {
+        for (Map.Entry<String, Sort> sortEntry : sort.entrySet()) {
             order.add(StringUtils.humpToUnderline(sortEntry.getKey()) + " " + sortEntry.getValue().toString());
         }
         sql = sql.replace("$TABLE_NAME", tableName)

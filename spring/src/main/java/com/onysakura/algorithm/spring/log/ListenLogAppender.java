@@ -29,7 +29,7 @@ public class ListenLogAppender<E> extends UnsynchronizedAppenderBase<E> {
         }
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         new Thread(() -> {
             try {

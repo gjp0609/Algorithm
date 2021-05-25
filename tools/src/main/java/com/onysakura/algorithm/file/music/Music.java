@@ -1,6 +1,6 @@
 package com.onysakura.algorithm.file.music;
 
-import com.onysakura.algorithm.utilities.db.sqlite.TableName;
+import com.onysakura.algorithm.utilities.db.anno.TableName;
 import lombok.Data;
 import lombok.ToString;
 

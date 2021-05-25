@@ -74,6 +74,14 @@ public class StringUtils {
         return result.toString();
     }
 
+    public static String upperFirst(String para) {
+        return para.substring(0, 1).toUpperCase() + para.substring(1);
+    }
+
+    public static String lowerFirst(String para) {
+        return para.substring(0, 1).toLowerCase() + para.substring(1);
+    }
+
     /**
      * 计算两个字符串的相似度
      */

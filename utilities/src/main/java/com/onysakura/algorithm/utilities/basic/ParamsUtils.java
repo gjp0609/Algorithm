@@ -3,12 +3,14 @@ package com.onysakura.algorithm.utilities.basic;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.onysakura.algorithm.utilities.basic.str.StringUtils;
+import com.onysakura.algorithm.utilities.exception.ParamCheckException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @SuppressWarnings("unused")
@@ -106,6 +108,38 @@ public class ParamsUtils {
         } catch (Exception e) {
             log.error("object to map error", e);
             return null;
+        }
+    }
+
+    /**
+     * 通用参数校验
+     */
+    public static <Param> Map<String, String> paramsCheckAll(Param param) throws ParamCheckException {
+        if (param == null) {
+            throw new ParamCheckException("参数不能为空");
+        }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Param>> validate = validator.validate(param);
+        HashMap<String, String> map = new HashMap<>();
+        for (ConstraintViolation<Param> violation : validate) {
+            map.put(violation.getPropertyPath().toString(), violation.getMessage());
+        }
+        return map.isEmpty() ? null : map;
+    }
+
+    /**
+     * 通用参数校验
+     */
+    public static <Param> void paramsCheck(Param param) throws ParamCheckException {
+        if (param == null) {
+            throw new ParamCheckException("参数不能为空");
+        }
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Param>> validate = validator.validate(param);
+        for (ConstraintViolation<Param> violation : validate) {
+            throw new ParamCheckException(violation.getMessage());
         }
     }
 }

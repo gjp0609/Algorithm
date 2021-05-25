@@ -74,10 +74,5 @@ public class SQLite {
         keyWord = keyWord.replace("'", "''");
         return keyWord;
     }
-
-    public enum Sort {
-        DESC,
-        ASC;
-    }
 }
 
