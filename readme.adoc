@@ -19,11 +19,18 @@
 
 .spring
 * `redis` Redis相关
-** link:./spring/src/test/java/com/onysakura/algorithm/spring/redis/LockTest.java[`LockTest`] Redis 实现分布式锁
+** link:./spring/src/test/java/com/onysakura/algorithm/spring/database/redis/LockTest.java[`LockTest`] Redis 实现分布式锁
 * `transaction` 事务相关
-** link:./spring/src/test/java/com/onysakura/algorithm/spring/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
+** link:./spring/src/test/java/com/onysakura/algorithm/spring/database/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
 
 .leetcode
 1. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_1/Main.java[`two sum`] 两数之和
 2. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_2/Main.java[`add two numbers`] 两数相加
 3. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_3/Main.java[`longest substring without repeating characters`] 无重复字符的最长子串
+
+.utilities
+1. link:./utilities/src/main/java/com/onysakura/algorithm/utilities/db/sqlite/SQLite.java[`SQLite`] SQLite工具
+2. link:./utilities/src/main/java/com/onysakura/algorithm/utilities/db/mysql/MySQL.java[`MySQL`] MySQL工具
+
+.tools
+1. link:./tools/src/main/java/com/onysakura/algorithm/file/text/generator/CodeGenerator.java[`CodeGenerator`] 实体类代码生成
