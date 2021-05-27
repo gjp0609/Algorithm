@@ -1,3 +1,5 @@
+package com.onysakura.algorithm.utilities.basic;
+
 import com.onysakura.algorithm.utilities.basic.idGenerator.uidGenerator.UidGenerator;
 
 import java.util.concurrent.ConcurrentHashMap;

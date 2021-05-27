@@ -35,6 +35,8 @@ public class CodeGenerator {
     private static final Statement STATEMENT;
     private static final HashMap<String, Class<?>> TYPE_MAP;
 
+    private static Configuration configuration;
+
     static {
         String url = "jdbc:mysql://" + URL + "/information_schema?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&";
         CONNECTION = MySQL.getConnection(url, USER, PASSWORD);
@@ -48,14 +50,26 @@ public class CodeGenerator {
         TYPE_MAP.put("datetime", LocalDateTime.class);
         TYPE_MAP.put("timestamp", LocalDateTime.class);
         TYPE_MAP.put("decimal", BigDecimal.class);
+
+        configuration = new Configuration(Configuration.VERSION_2_3_0);
+        File file = new File(TEMPLATE_PATH);
+        try {
+            configuration.setDirectoryForTemplateLoading(file);
+        } catch (Exception ignored) {
+        }
     }
 
     public static void main(String[] args) throws Exception {
-        Configuration configuration = new Configuration(Configuration.VERSION_2_3_0);
-        File file = new File(TEMPLATE_PATH);
-        configuration.setDirectoryForTemplateLoading(file);
-        Template template = configuration.getTemplate("Entity.ftl");
         List<Table> tables = getTableInfo();
+        generateEntity(tables);
+        generateMapper(tables);
+        generateMapperXml(tables);
+        log.info("done");
+        close();
+    }
+
+    private static void generateEntity(List<Table> tables) throws Exception {
+        Template template = configuration.getTemplate("Entity.ftl");
         for (Table table : tables) {
             List<Map<String, String>> columns = getColumns(table);
             String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
@@ -64,12 +78,38 @@ public class CodeGenerator {
             dataMap.put("tableName", table.getTableName());
             dataMap.put("tableComment", table.getTableComment());
             dataMap.put("columns", columns);
-            File docFile = new File(CLASS_PATH + "/" + className + ".java");
+            new File(CLASS_PATH + "/" + className + "/").mkdirs();
+            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + ".java");
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
             template.process(dataMap, writer);
-            log.info("done");
         }
-        close();
+    }
+
+    private static void generateMapper(List<Table> tables) throws Exception {
+        Template template = configuration.getTemplate("Mapper.ftl");
+        for (Table table : tables) {
+            String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("className", className);
+            dataMap.put("tableComment", table.getTableComment());
+            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + "Mapper.java");
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            template.process(dataMap, writer);
+        }
+    }
+
+    private static void generateMapperXml(List<Table> tables) throws Exception {
+        Template template = configuration.getTemplate("MapperXml.ftl");
+        for (Table table : tables) {
+            List<Map<String, String>> columns = getColumns(table);
+            String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("className", className);
+            dataMap.put("columns", columns);
+            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + "Mapper.xml");
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            template.process(dataMap, writer);
+        }
     }
 
     private static List<Table> getTableInfo() throws Exception {
@@ -92,6 +132,7 @@ public class CodeGenerator {
         for (Column column : columns) {
             Map<String, String> map = new HashMap<>();
             map.put("comment", column.getColumnComment());
+            map.put("columnName", column.getColumnName());
             map.put("name", StringUtils.lowerFirst(StringUtils.underlineToHump(column.getColumnName())));
             Class<?> type = TYPE_MAP.get(column.getDataType());
             map.put("type", type.getSimpleName());
