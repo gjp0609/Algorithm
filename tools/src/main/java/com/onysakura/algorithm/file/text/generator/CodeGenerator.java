@@ -70,7 +70,9 @@ public class CodeGenerator {
     }
 
     private static void generateDoc(List<Table> tables) throws Exception {
-        Template template = configuration.getTemplate("Doc.ftl");
+        Template template = configuration.getTemplate("DatabaseDoc.ftl");
+        File docFile = new File(CLASS_PATH + "/database_" + TABLE_SCHEMA + ".md");
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
         for (Table table : tables) {
             List<Map<String, String>> columns = getColumns(table);
             String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
@@ -79,9 +81,6 @@ public class CodeGenerator {
             dataMap.put("tableName", table.getTableName());
             dataMap.put("tableComment", table.getTableComment());
             dataMap.put("columns", columns);
-            new File(CLASS_PATH + "/" + className + "/").mkdirs();
-            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + ".md");
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
             template.process(dataMap, writer);
         }
     }
