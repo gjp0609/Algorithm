@@ -61,11 +61,29 @@ public class CodeGenerator {
 
     public static void main(String[] args) throws Exception {
         List<Table> tables = getTableInfo();
-        generateEntity(tables);
-        generateMapper(tables);
-        generateMapperXml(tables);
+//        generateDoc(tables);
+//        generateEntity(tables);
+//        generateMapper(tables);
+//        generateMapperXml(tables);
         log.info("done");
         close();
+    }
+
+    private static void generateDoc(List<Table> tables) throws Exception {
+        Template template = configuration.getTemplate("Doc.ftl");
+        for (Table table : tables) {
+            List<Map<String, String>> columns = getColumns(table);
+            String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
+            Map<String, Object> dataMap = new HashMap<>();
+            dataMap.put("className", className);
+            dataMap.put("tableName", table.getTableName());
+            dataMap.put("tableComment", table.getTableComment());
+            dataMap.put("columns", columns);
+            new File(CLASS_PATH + "/" + className + "/").mkdirs();
+            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + ".md");
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
+            template.process(dataMap, writer);
+        }
     }
 
     private static void generateEntity(List<Table> tables) throws Exception {
@@ -135,6 +153,7 @@ public class CodeGenerator {
             map.put("columnName", column.getColumnName());
             map.put("name", StringUtils.lowerFirst(StringUtils.underlineToHump(column.getColumnName())));
             Class<?> type = TYPE_MAP.get(column.getDataType());
+            map.put("dataType", column.getDataType());
             map.put("type", type.getSimpleName());
             addValidAnnotation(type, column, map);
             list.add(map);
@@ -147,6 +166,7 @@ public class CodeGenerator {
         // 长度验证
         String maximumLength = column.getCharacterMaximumLength();
         if (!StringUtils.isBlank(maximumLength)) {
+            map.put("length", maximumLength);
             String maximumLengthMessage = fieldName + "不能超过此长度：" + maximumLength;
             if (type.getTypeName().equals(String.class.getTypeName())) {
                 String msg = String.format("@Length(max = %s, message = \"%s\")", maximumLength, maximumLengthMessage);
@@ -159,6 +179,7 @@ public class CodeGenerator {
         }
         // 空验证
         if (!"YES".equalsIgnoreCase(column.getIsNullable())) {
+            map.put("nullable", column.getIsNullable());
             String nullableMessage = fieldName + "不能为空";
             String msg = String.format("@NotNull(message = \"%s\")", nullableMessage);
             map.put("nullableValid", msg);
