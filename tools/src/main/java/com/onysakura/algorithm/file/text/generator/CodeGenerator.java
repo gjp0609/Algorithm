@@ -16,7 +16,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @Slf4j
 public class CodeGenerator {
@@ -28,7 +31,7 @@ public class CodeGenerator {
     private static final String TABLE_SCHEMA = "test";
     private static final String TABLE_NAME = "test";
 
-    private static final String TEMPLATE_PATH = "tools/src/main/resources/template/java";
+    private static final String TEMPLATE_PATH = "tools/src/main/resources/template";
     private static final String CLASS_PATH = "tools/src/main/resources/output";
 
     private static final Connection CONNECTION;
@@ -47,9 +50,15 @@ public class CodeGenerator {
         TYPE_MAP.put("bigint", Long.class);
         TYPE_MAP.put("tinyint", Integer.class);
         TYPE_MAP.put("int", Integer.class);
-        TYPE_MAP.put("datetime", LocalDateTime.class);
-        TYPE_MAP.put("timestamp", LocalDateTime.class);
+        TYPE_MAP.put("double", Double.class);
         TYPE_MAP.put("decimal", BigDecimal.class);
+        TYPE_MAP.put("datetime", LocalDateTime.class);
+        TYPE_MAP.put("date", LocalDateTime.class);
+        TYPE_MAP.put("timestamp", LocalDateTime.class);
+        TYPE_MAP.put("char", String.class);
+        TYPE_MAP.put("text", String.class);
+        TYPE_MAP.put("longtext", String.class);
+        TYPE_MAP.put("longblob", Object.class);
 
         configuration = new Configuration(Configuration.VERSION_2_3_0);
         File file = new File(TEMPLATE_PATH);
@@ -61,72 +70,57 @@ public class CodeGenerator {
 
     public static void main(String[] args) throws Exception {
         List<Table> tables = getTableInfo();
-//        generateDoc(tables);
-//        generateEntity(tables);
-//        generateMapper(tables);
-//        generateMapperXml(tables);
+        List<TableInfo> list = getTableInfos(tables);
+//        generateDoc(list);
+//        generateEntityAndMapper(list);
         log.info("done");
         close();
     }
 
-    private static void generateDoc(List<Table> tables) throws Exception {
+    public static void generateDoc(List<TableInfo> list) throws Exception {
         Template template = configuration.getTemplate("DatabaseDoc.ftl");
         File docFile = new File(CLASS_PATH + "/database_" + TABLE_SCHEMA + ".md");
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
-        for (Table table : tables) {
-            List<Map<String, String>> columns = getColumns(table);
-            String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
-            Map<String, Object> dataMap = new HashMap<>();
-            dataMap.put("className", className);
-            dataMap.put("tableName", table.getTableName());
-            dataMap.put("tableComment", table.getTableComment());
-            dataMap.put("columns", columns);
-            template.process(dataMap, writer);
+        HashMap<String, List<TableInfo>> map = new HashMap<>();
+        map.put("tables", list);
+        template.process(map, writer);
+    }
+
+    public static void generateEntityAndMapper(List<TableInfo> list) throws Exception {
+        Template entityTemplate = configuration.getTemplate("Entity.ftl");
+        Template mapperTemplate = configuration.getTemplate("Mapper.ftl");
+        Template mapperXmlTemplate = configuration.getTemplate("MapperXml.ftl");
+        for (TableInfo tableInfo : list) {
+            String className = String.valueOf(tableInfo.getClassName());
+            String entityPath = CLASS_PATH + "/" + className;
+            new File(entityPath).mkdirs();
+            String prefix = entityPath + "/" + className;
+            File entityFile = new File(prefix + ".java");
+            File mapperFile = new File(prefix + "Mapper.java");
+            File mapperXmlFile = new File(prefix + "Mapper.xml");
+            BufferedWriter entityWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(entityFile)));
+            BufferedWriter mapperWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mapperFile)));
+            BufferedWriter mapperXmlWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mapperXmlFile)));
+            entityTemplate.process(tableInfo, entityWriter);
+            mapperTemplate.process(tableInfo, mapperWriter);
+            mapperXmlTemplate.process(tableInfo, mapperXmlWriter);
         }
     }
 
-    private static void generateEntity(List<Table> tables) throws Exception {
-        Template template = configuration.getTemplate("Entity.ftl");
+    private static List<TableInfo> getTableInfos(List<Table> tables) throws Exception {
+        List<TableInfo> list = new ArrayList<>();
         for (Table table : tables) {
-            List<Map<String, String>> columns = getColumns(table);
+            List<ColumnInfo> columns = getColumns(table);
             String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
-            Map<String, Object> dataMap = new HashMap<>();
-            dataMap.put("className", className);
-            dataMap.put("tableName", table.getTableName());
-            dataMap.put("tableComment", table.getTableComment());
-            dataMap.put("columns", columns);
-            new File(CLASS_PATH + "/" + className + "/").mkdirs();
-            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + ".java");
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
-            template.process(dataMap, writer);
+            TableInfo tableInfo = new TableInfo();
+            tableInfo.setSchema(TABLE_SCHEMA);
+            tableInfo.setTableName(table.getTableName());
+            tableInfo.setTableComment(table.getTableComment());
+            tableInfo.setClassName(className);
+            tableInfo.setColumns(columns);
+            list.add(tableInfo);
         }
-    }
-
-    private static void generateMapper(List<Table> tables) throws Exception {
-        Template template = configuration.getTemplate("Mapper.ftl");
-        for (Table table : tables) {
-            String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
-            Map<String, Object> dataMap = new HashMap<>();
-            dataMap.put("className", className);
-            dataMap.put("tableComment", table.getTableComment());
-            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + "Mapper.java");
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
-            template.process(dataMap, writer);
-        }
-    }
-
-    private static void generateMapperXml(List<Table> tables) throws Exception {
-        Template template = configuration.getTemplate("MapperXml.ftl");
-        for (Table table : tables) {
-            List<Map<String, String>> columns = getColumns(table);
-            String className = StringUtils.upperFirst(StringUtils.underlineToHump(table.getTableName()));
-            Map<String, Object> dataMap = new HashMap<>();
-            dataMap.put("className", className);
-            dataMap.put("columns", columns);
-            File docFile = new File(CLASS_PATH + "/" + className + "/" + className + "Mapper.xml");
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
-            template.process(dataMap, writer);
-        }
+        return list;
     }
 
     private static List<Table> getTableInfo() throws Exception {
@@ -138,8 +132,8 @@ public class CodeGenerator {
         return MySQL.queryList(STATEMENT, Table.class, queries);
     }
 
-    private static List<Map<String, String>> getColumns(Table table) throws Exception {
-        ArrayList<Map<String, String>> list = new ArrayList<>();
+    private static List<ColumnInfo> getColumns(Table table) throws Exception {
+        List<ColumnInfo> list = new ArrayList<>();
         Column queries = new Column();
         queries.setTableSchema(table.getTableSchema());
         queries.setTableName(table.getTableName());
@@ -147,41 +141,47 @@ public class CodeGenerator {
         sort.put("ordinalPosition", Sort.ASC);
         List<Column> columns = MySQL.queryList(STATEMENT, Column.class, queries, sort);
         for (Column column : columns) {
-            Map<String, String> map = new HashMap<>();
-            map.put("comment", column.getColumnComment());
-            map.put("columnName", column.getColumnName());
-            map.put("name", StringUtils.lowerFirst(StringUtils.underlineToHump(column.getColumnName())));
+            ColumnInfo columnInfo = new ColumnInfo();
+            columnInfo.setComment(column.getColumnComment());
+            columnInfo.setColumnName(column.getColumnName());
+            columnInfo.setName(StringUtils.lowerFirst(StringUtils.underlineToHump(column.getColumnName())));
+            columnInfo.setDataType(column.getDataType());
             Class<?> type = TYPE_MAP.get(column.getDataType());
-            map.put("dataType", column.getDataType());
-            map.put("type", type.getSimpleName());
-            addValidAnnotation(type, column, map);
-            list.add(map);
+            if (type == null) {
+                log.warn("unknown type: {}", column.getDataType());
+            }
+            columnInfo.setType(type.getSimpleName());
+            addValidAnnotation(type, column, columnInfo);
+            list.add(columnInfo);
         }
         return list;
     }
 
-    private static void addValidAnnotation(Class<?> type, Column column, Map<String, String> map) {
+    private static void addValidAnnotation(Class<?> type, Column column, ColumnInfo columnInfo) {
         String fieldName = StringUtils.lowerFirst(StringUtils.underlineToHump(column.getColumnName()));
         // 长度验证
         String maximumLength = column.getCharacterMaximumLength();
+        Check:
         if (!StringUtils.isBlank(maximumLength)) {
-            map.put("length", maximumLength);
+            columnInfo.setLength(maximumLength);
             String maximumLengthMessage = fieldName + "不能超过此长度：" + maximumLength;
             if (type.getTypeName().equals(String.class.getTypeName())) {
-                String msg = String.format("@Length(max = %s, message = \"%s\")", maximumLength, maximumLengthMessage);
-                map.put("lengthValid", msg);
+                String anno = String.format("@Length(max = %s, message = \"%s\")", maximumLength, maximumLengthMessage);
+                columnInfo.setLengthValid(anno);
+                break Check;
             }
             if (type.getTypeName().equals(Long.class.getTypeName()) || type.getTypeName().equals(Integer.class.getTypeName())) {
-                String msg = String.format("@Digits(integer = %s, message = \"%s\", fraction = 0)", maximumLength, maximumLengthMessage);
-                map.put("lengthValid", msg);
+                String anno = String.format("@Digits(integer = %s, message = \"%s\", fraction = 0)", maximumLength, maximumLengthMessage);
+                columnInfo.setLengthValid(anno);
+                break Check;
             }
         }
         // 空验证
         if (!"YES".equalsIgnoreCase(column.getIsNullable())) {
-            map.put("nullable", column.getIsNullable());
+            columnInfo.setNullable(column.getIsNullable());
             String nullableMessage = fieldName + "不能为空";
-            String msg = String.format("@NotNull(message = \"%s\")", nullableMessage);
-            map.put("nullableValid", msg);
+            String anno = String.format("@NotNull(message = \"%s\")", nullableMessage);
+            columnInfo.setNullableValid(anno);
         }
     }
 
