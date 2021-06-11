@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,6 +38,7 @@ public class PcrReader {
             System.out.println(rank);
             Workbook wb = WorkbookFactory.create(file);
             Sheet sheet = wb.getSheetAt(0);
+            HashSet<Object> set = new HashSet<>();
             for (int j = 0; j < 1000; j++) {
                 Row row = sheet.getRow(j);
                 if (row != null) {
@@ -46,6 +48,9 @@ public class PcrReader {
                     Cell jjcCell = row.getCell(5);
                     if (numCell != null && CellType.NUMERIC == numCell.getCellType()) {
                         String key = getCellString(numCell);
+                        while (set.contains(key)) {
+                            key += "+";
+                        }
                         if (!map.containsKey(key)) {
                             TreeMap<String, Object> treeMap = new TreeMap<>();
                             treeMap.put("name", getCellString(nameCell).split("\\\\n")[0]);
@@ -56,6 +61,7 @@ public class PcrReader {
                         Map<String, Object> treeMap = map.get(key);
                         String[] ghz = (String[]) treeMap.get("ghz");
                         ghz[index] = getCellString(ghzCell);
+                        set.add(key);
                     }
                 }
             }
