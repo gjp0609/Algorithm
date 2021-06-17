@@ -1,5 +1,8 @@
 package com.onysakura.algorithm.utilities.web.httpclient;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +22,7 @@ public class PostParam extends GetParam {
     /**
      * 请求内容
      */
-    private Map<String, String> body;
+    private String body;
     /**
      * 上传文件路径
      */
@@ -47,38 +50,37 @@ public class PostParam extends GetParam {
         return this;
     }
 
-    public Map<String, String> getBody() {
+    public String getBody() {
         return body;
     }
 
-    public PostParam setBody(Map<String, String> body) {
+    public PostParam setBody(String body) {
         this.body = body;
         return this;
     }
 
-    /**
-     * for webservice
-     */
-    public PostParam setBody(String body) {
-        HashMap<String, String> map = new HashMap<>();
-        map.put("body", body);
-        this.body = map;
+    public PostParam setBody(Object body) {
+        this.body = JSON.toJSONString(body);
         return this;
     }
 
     public PostParam addBody(Map<String, String> body) {
         if (this.body == null) {
-            this.body = new HashMap<>();
+            this.body = new JSONObject().toJSONString();
         }
-        this.body.putAll(body);
+        JSONObject jsonObject = JSON.parseObject(this.body);
+        jsonObject.putAll(body);
+
         return this;
     }
 
     public PostParam addBody(String key, String value) {
         if (this.body == null) {
-            this.body = new HashMap<>();
+            this.body = new JSONObject().toJSONString();
         }
-        this.body.put(key, value);
+        JSONObject jsonObject = JSON.parseObject(this.body);
+        jsonObject.put(key, value);
+        this.body = jsonObject.toJSONString();
         return this;
     }
 

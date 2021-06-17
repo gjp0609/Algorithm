@@ -1,6 +1,7 @@
 package com.onysakura.algorithm.utilities.web.httpclient;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.onysakura.algorithm.utilities.basic.str.RandomUtils;
 import com.onysakura.algorithm.utilities.basic.str.StringUtils;
 import com.onysakura.algorithm.utilities.basic.XmlUtils;
@@ -101,7 +102,7 @@ public class HttpClientUtils {
         OutputStream os = null;
         DataOutputStream ds = null;
         BufferedReader br = null;
-        String body = null;
+        String body;
         ResponseResult responseResult = new ResponseResult();
         try {
             URL url = new URL(httpUrl);
@@ -123,10 +124,10 @@ public class HttpClientUtils {
             switch (contentType) {
                 case WEBSERVICE_XML_TEXT:
                 case APPLICATION_JSON_TEXT:
-                    body = postParam.getBody().get("body");
+                    body = postParam.getBody();
                     break;
                 case APPLICATION_XML:
-                    body = XmlUtils.mapToXml(postParam.getBody());
+                    body = XmlUtils.mapToXml(JSON.parseObject(postParam.getBody()));
                     break;
                 case MULTIPART_FORM_DATA:
                     String end = "\r\n";
@@ -134,8 +135,9 @@ public class HttpClientUtils {
                     String boundary = "----WebKitFormBoundary" + RandomUtils.randomStr(10);
                     connection.setRequestProperty("Content-Type", contentType.getValue() + "; boundary=" + boundary);
                     ds = new DataOutputStream(connection.getOutputStream());
-                    Map<String, String> postParamBody = postParam.getBody();
-                    if (postParamBody != null) {
+                    body = postParam.getBody();
+                    if (body != null) {
+                        JSONObject postParamBody = JSON.parseObject(body);
                         for (String key : postParamBody.keySet()) {
                             ds.writeBytes(twoHyphens + boundary);
                             ds.writeBytes(end);
@@ -144,7 +146,7 @@ public class HttpClientUtils {
                             ds.writeBytes("Content-Type: text/plain");
                             ds.writeBytes(end);
                             ds.writeBytes(end);
-                            ds.writeBytes(postParamBody.get(key));
+                            ds.writeBytes(String.valueOf(postParamBody.get(key)));
                             ds.writeBytes(end);
                         }
                     }
@@ -182,7 +184,7 @@ public class HttpClientUtils {
                     break;
                 case APPLICATION_FORM_URLENCODED:
                     StringBuffer postData = new StringBuffer();
-                    for (Map.Entry<String, String> param : postParam.getBody().entrySet()) {
+                    for (Map.Entry<String, Object> param : JSON.parseObject(postParam.getBody()).entrySet()) {
                         if (postData.length() != 0) postData.append('&');
                         postData.append(URLEncoder.encode(param.getKey(), charset.name()));
                         postData.append('=');
