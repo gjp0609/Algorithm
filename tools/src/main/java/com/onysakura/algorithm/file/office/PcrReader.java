@@ -86,7 +86,12 @@ public class PcrReader {
             case STRING:
                 return cell.getStringCellValue().replace("\n", "\\n");
             case NUMERIC:
-                return String.valueOf(cell.getNumericCellValue());
+                double doubleValue = cell.getNumericCellValue();
+                String doubleNum = String.valueOf(doubleValue);
+                if (doubleValue - Math.round(doubleValue) == 0) {
+                    return String.valueOf(Math.round(doubleValue));
+                }
+                return doubleNum;
             case BOOLEAN:
                 return String.valueOf(cell.getBooleanCellValue());
             default:
