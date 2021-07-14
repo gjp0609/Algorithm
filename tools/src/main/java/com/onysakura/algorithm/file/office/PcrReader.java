@@ -55,12 +55,16 @@ public class PcrReader {
                             TreeMap<String, Object> treeMap = new TreeMap<>();
                             treeMap.put("name", getCellString(nameCell).split("\\\\n")[0]);
                             String[] ghz = new String[length];
+                            String[] jjc = new String[length];
                             treeMap.put("ghz", ghz);
+                            treeMap.put("jjc", jjc);
                             map.put(key, treeMap);
                         }
                         Map<String, Object> treeMap = map.get(key);
                         String[] ghz = (String[]) treeMap.get("ghz");
+                        String[] jjc = (String[]) treeMap.get("jjc");
                         ghz[index] = getCellString(ghzCell);
+                        jjc[index] = getCellString(jjcCell);
                         set.add(key);
                     }
                 }
