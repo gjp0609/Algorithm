@@ -1,7 +1,7 @@
-package com.onysakura.algorithm.file.office;
+package com.onysakura.algorithm.file.text.generator;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
+import com.onysakura.algorithm.file.text.generator.base.FtlTemplate;
+import com.onysakura.algorithm.file.text.generator.base.FtlGeneratorUtils;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.*;
@@ -11,19 +11,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class PcrReader {
-
-    private static final String TEMPLATE_PATH = "tools/src/main/resources/template";
-    private static final String OUTPUT_PATH = "tools/src/main/resources/output";
-
-    private static Configuration configuration = new Configuration(Configuration.VERSION_2_3_0);
-
-    static {
-        try {
-            configuration.setDirectoryForTemplateLoading(new File(TEMPLATE_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String[] args) throws Exception {
         Map<String, Map<String, Object>> map = new TreeMap<>();
@@ -71,14 +58,10 @@ public class PcrReader {
             }
             index++;
         }
-//        System.out.println(JSON.toJSONString(map, SerializerFeature.PrettyFormat));
-        Template template = configuration.getTemplate("pcr.ftl");
-        File docFile = new File(OUTPUT_PATH + "/pcr.md");
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("datas", map);
         rootMap.put("ranks", ranks);
-        template.process(rootMap, writer);
+        FtlGeneratorUtils.generate(FtlTemplate.pcr, "pcr", "/pcr_rank.md", rootMap);
     }
 
     public static String getCellString(Cell cell) {
