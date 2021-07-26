@@ -1,4 +1,4 @@
-package com.onysakura.algorithm.file.text.generator;
+package com.onysakura.algorithm.file.text.generator.database.model;
 
 import com.onysakura.algorithm.utilities.db.anno.ColumnName;
 import com.onysakura.algorithm.utilities.db.anno.TableName;

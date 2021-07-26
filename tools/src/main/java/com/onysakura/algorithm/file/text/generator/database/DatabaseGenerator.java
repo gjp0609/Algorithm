@@ -1,16 +1,16 @@
-package com.onysakura.algorithm.file.text.generator;
+package com.onysakura.algorithm.file.text.generator.database;
 
+import com.onysakura.algorithm.file.text.generator.base.FtlGeneratorUtils;
+import com.onysakura.algorithm.file.text.generator.base.FtlTemplate;
+import com.onysakura.algorithm.file.text.generator.database.model.Column;
+import com.onysakura.algorithm.file.text.generator.database.model.ColumnInfo;
+import com.onysakura.algorithm.file.text.generator.database.model.Table;
+import com.onysakura.algorithm.file.text.generator.database.model.TableInfo;
 import com.onysakura.algorithm.utilities.basic.str.StringUtils;
 import com.onysakura.algorithm.utilities.db.enums.Sort;
 import com.onysakura.algorithm.utilities.db.mysql.MySQL;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,23 +22,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 @Slf4j
-public class CodeGenerator {
+public class DatabaseGenerator {
 
-    private static final String URL = "127.0.0.1:3306";
+    private static final String URL = "172.17.32.83:3306";
     private static final String USER = "root";
-    private static final String PASSWORD = "123456";
+    private static final String PASSWORD = "1MskeeLxROQw9EVQ";
 
-    private static final String TABLE_SCHEMA = "test";
-    private static final String TABLE_NAME = "test";
-
-    private static final String TEMPLATE_PATH = "tools/src/main/resources/template";
-    private static final String CLASS_PATH = "tools/src/main/resources/output";
+    private static final String TABLE_SCHEMA = "payment";
+    private static final String TABLE_NAME = "pay_payment_merchant";
 
     private static final Connection CONNECTION;
     private static final Statement STATEMENT;
     private static final HashMap<String, Class<?>> TYPE_MAP;
-
-    private static Configuration configuration;
 
     static {
         String url = "jdbc:mysql://" + URL + "/information_schema?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&";
@@ -59,51 +54,29 @@ public class CodeGenerator {
         TYPE_MAP.put("text", String.class);
         TYPE_MAP.put("longtext", String.class);
         TYPE_MAP.put("longblob", Object.class);
-
-        configuration = new Configuration(Configuration.VERSION_2_3_0);
-        File file = new File(TEMPLATE_PATH);
-        try {
-            configuration.setDirectoryForTemplateLoading(file);
-        } catch (Exception ignored) {
-        }
     }
 
     public static void main(String[] args) throws Exception {
         List<Table> tables = getTableInfo();
         List<TableInfo> list = getTableInfos(tables);
-//        generateDoc(list);
-//        generateEntityAndMapper(list);
+        generateDoc(list);
+        generateEntityAndMapper(list);
         log.info("done");
         close();
     }
 
     public static void generateDoc(List<TableInfo> list) throws Exception {
-        Template template = configuration.getTemplate("DatabaseDoc.ftl");
-        File docFile = new File(CLASS_PATH + "/database_" + TABLE_SCHEMA + ".md");
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(docFile)));
         HashMap<String, List<TableInfo>> map = new HashMap<>();
         map.put("tables", list);
-        template.process(map, writer);
+        FtlGeneratorUtils.generate(FtlTemplate.DatabaseDoc, "db", TABLE_SCHEMA + ".md", map);
     }
 
     public static void generateEntityAndMapper(List<TableInfo> list) throws Exception {
-        Template entityTemplate = configuration.getTemplate("Entity.ftl");
-        Template mapperTemplate = configuration.getTemplate("Mapper.ftl");
-        Template mapperXmlTemplate = configuration.getTemplate("MapperXml.ftl");
         for (TableInfo tableInfo : list) {
             String className = String.valueOf(tableInfo.getClassName());
-            String entityPath = CLASS_PATH + "/" + className;
-            new File(entityPath).mkdirs();
-            String prefix = entityPath + "/" + className;
-            File entityFile = new File(prefix + ".java");
-            File mapperFile = new File(prefix + "Mapper.java");
-            File mapperXmlFile = new File(prefix + "Mapper.xml");
-            BufferedWriter entityWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(entityFile)));
-            BufferedWriter mapperWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mapperFile)));
-            BufferedWriter mapperXmlWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mapperXmlFile)));
-            entityTemplate.process(tableInfo, entityWriter);
-            mapperTemplate.process(tableInfo, mapperWriter);
-            mapperXmlTemplate.process(tableInfo, mapperXmlWriter);
+            FtlGeneratorUtils.generate(FtlTemplate.Entity, className, className + ".java", tableInfo);
+            FtlGeneratorUtils.generate(FtlTemplate.Entity, className, className + "Mapper.java", tableInfo);
+            FtlGeneratorUtils.generate(FtlTemplate.Entity, className, className + "Mapper.xml", tableInfo);
         }
     }
 
