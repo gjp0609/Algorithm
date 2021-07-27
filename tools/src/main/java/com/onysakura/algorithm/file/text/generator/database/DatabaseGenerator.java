@@ -74,9 +74,10 @@ public class DatabaseGenerator {
     public static void generateEntityAndMapper(List<TableInfo> list) throws Exception {
         for (TableInfo tableInfo : list) {
             String className = String.valueOf(tableInfo.getClassName());
-            FtlGeneratorUtils.generate(FtlTemplate.Entity, className, className + ".java", tableInfo);
-            FtlGeneratorUtils.generate(FtlTemplate.Entity, className, className + "Mapper.java", tableInfo);
-            FtlGeneratorUtils.generate(FtlTemplate.Entity, className, className + "Mapper.xml", tableInfo);
+            String dir = "code/" + className;
+            FtlGeneratorUtils.generate(FtlTemplate.Entity, dir, className + ".java", tableInfo);
+            FtlGeneratorUtils.generate(FtlTemplate.Entity, dir, className + "Mapper.java", tableInfo);
+            FtlGeneratorUtils.generate(FtlTemplate.Entity, dir, className + "Mapper.xml", tableInfo);
         }
     }
 
