@@ -24,12 +24,12 @@ import java.util.List;
 @Slf4j
 public class DatabaseGenerator {
 
-    private static final String URL = "172.17.32.83:3306";
+    private static final String URL = "127.0.0.1:3306";
     private static final String USER = "root";
-    private static final String PASSWORD = "1MskeeLxROQw9EVQ";
+    private static final String PASSWORD = "123456";
 
-    private static final String TABLE_SCHEMA = "payment";
-    private static final String TABLE_NAME = "pay_payment_merchant";
+    private static final String TABLE_SCHEMA = "mysql";
+    private static final String TABLE_NAME = "user";
 
     private static final Connection CONNECTION;
     private static final Statement STATEMENT;
