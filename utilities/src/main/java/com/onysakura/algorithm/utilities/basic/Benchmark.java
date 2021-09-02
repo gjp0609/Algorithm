@@ -22,4 +22,10 @@ public class Benchmark {
         double timeUsageInDouble = timeUsage / 1000000D;
         System.out.println("\033[35m " + threadLocal.get().get("count") + ". time usage: " + timeUsageInDouble + "ms\033[0m");
     }
+
+    public static double endWithoutPrint() {
+        threadLocal.get().put("endTime", System.nanoTime());
+        long timeUsage = threadLocal.get().get("endTime") - threadLocal.get().get("startTime");
+        return timeUsage / 1000000D;
+    }
 }
