@@ -14,6 +14,7 @@
 
     <modules>
         <module>oa</module>
+        <module>single</module>
     </modules>
 
 </project>

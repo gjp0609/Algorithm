@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>fun.onysakura.algorithm</groupId>
-            <artifactId>utils</artifactId>
+            <artifactId>utils-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -77,7 +77,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>com.onysakura.algorithm.kits.oa.OA</mainClass>
+                            <mainClass>fun.onysakura.algorithm.kits.oa.OA</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
