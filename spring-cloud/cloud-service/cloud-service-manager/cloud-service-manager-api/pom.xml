@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>cloud-service-manager-api</artifactId>
+    <version>0.1</version>
+    <name>cloud-service-manager-api</name>
+    <description>Spring Cloud manager service api</description>
+    <packaging>jar</packaging>
+
+    <parent>
+        <artifactId>cloud-service-manager</artifactId>
+        <groupId>fun.onysakura.algorithm</groupId>
+        <version>0.1</version>
+    </parent>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>fun.onysakura.algorithm</groupId>
+            <artifactId>cloud-common-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

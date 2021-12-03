@@ -14,6 +14,7 @@
         <module>leetcode</module>
         <module>kits</module>
         <module>spring</module>
+        <module>spring-cloud</module>
         <module>utils-core</module>
         <module>utils</module>
     </modules>

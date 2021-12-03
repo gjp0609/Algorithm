@@ -14,7 +14,7 @@ public class TransactionTestModel {
 
     @Id
     @GeneratedValue(generator = "idGenerator")
-    @GenericGenerator(name = "idGenerator", strategy = "com.onysakura.algorithm.spring.jpa.id.IdGenerator")
+    @GenericGenerator(name = "idGenerator", strategy = "fun.onysakura.algorithm.spring.jpa.id.IdGenerator")
     @Column(columnDefinition = "bigint(20)")
     private Long id;
 

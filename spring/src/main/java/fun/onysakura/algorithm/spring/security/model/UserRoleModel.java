@@ -13,7 +13,7 @@ public class UserRoleModel implements Serializable {
 
     @Id
     @GeneratedValue(generator = "idGenerator")
-    @GenericGenerator(name = "idGenerator", strategy = "com.onysakura.algorithm.spring.jpa.id.IdGenerator")
+    @GenericGenerator(name = "idGenerator", strategy = "fun.onysakura.algorithm.spring.jpa.id.IdGenerator")
     @Column(columnDefinition = "bigint(20) comment 'id'")
     private Long id;
 

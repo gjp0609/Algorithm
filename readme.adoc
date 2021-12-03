@@ -1,36 +1,36 @@
 .core
 * `basic` 基础相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/basic/JavaInitOrder.java[`JavaInitOrder`] 代码初始化顺序
-** link:./core/src/main/java/com/onysakura/algorithm/core/basic/SwitchOrder.java[`SwitchOrder`] switch 的用法
+** link:./core/src/main/java/fun/onysakura/algorithm/core/basic/JavaInitOrder.java[`JavaInitOrder`] 代码初始化顺序
+** link:./core/src/main/java/fun/onysakura/algorithm/core/basic/SwitchOrder.java[`SwitchOrder`] switch 的用法
 
 * `logic` 逻辑相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/logic/BaseNCalculator.java[`BaseNCalculator`] 任意进制转换
-** link:./core/src/main/java/com/onysakura/algorithm/core/logic/PrintTriangleSpiral.java[`PrintTriangleSpiral`] 打印三角螺旋
+** link:./core/src/main/java/fun/onysakura/algorithm/core/logic/BaseNCalculator.java[`BaseNCalculator`] 任意进制转换
+** link:./core/src/main/java/fun/onysakura/algorithm/core/logic/PrintTriangleSpiral.java[`PrintTriangleSpiral`] 打印三角螺旋
 
 * `security` 安全加密相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/security/rsa/RSA.java[`RSA`] RSA 加密
+** link:./core/src/main/java/fun/onysakura/algorithm/core/security/rsa/RSA.java[`RSA`] RSA 加密
 
 * `sort` 排序相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/sort/QuickSort.java[`QuickSort`] 快速排序
-** link:./core/src/main/java/com/onysakura/algorithm/core/sort/SecondLargestNum.java[`SecondLargestNum`] 取一个数组中第二大的数字
+** link:./core/src/main/java/fun/onysakura/algorithm/core/sort/QuickSort.java[`QuickSort`] 快速排序
+** link:./core/src/main/java/fun/onysakura/algorithm/core/sort/SecondLargestNum.java[`SecondLargestNum`] 取一个数组中第二大的数字
 
 * `thread` 多线程相关
-** link:./core/src/main/java/com/onysakura/algorithm/core/thread/RejectedExecutionHandler.java[`RejectedExecutionHandler`] ThreadPoolExecutor 中的拒绝机制
+** link:./core/src/main/java/fun/onysakura/algorithm/core/thread/RejectedExecutionHandler.java[`RejectedExecutionHandler`] ThreadPoolExecutor 中的拒绝机制
 
 .spring
 * `redis` Redis相关
-** link:./spring/src/test/java/com/onysakura/algorithm/spring/database/redis/LockTest.java[`LockTest`] Redis 实现分布式锁
+** link:./spring/src/test/java/fun/onysakura/algorithm/spring/database/redis/LockTest.java[`LockTest`] Redis 实现分布式锁
 * `transaction` 事务相关
-** link:./spring/src/test/java/com/onysakura/algorithm/spring/database/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
+** link:./spring/src/test/java/fun/onysakura/algorithm/spring/database/transaction/TransactionTest.java[`TransactionTest`] Spring 中的事务隔离级别
 
 .leetcode
-1. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_1/Main.java[`two sum`] 两数之和
-2. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_2/Main.java[`add two numbers`] 两数相加
-3. link:./leetcode/src/main/java/com/onysakura/algorithm/leetcode/_3/Main.java[`longest substring without repeating characters`] 无重复字符的最长子串
+1. link:./leetcode/src/main/java/fun/onysakura/algorithm/leetcode/_1/Main.java[`two sum`] 两数之和
+2. link:./leetcode/src/main/java/fun/onysakura/algorithm/leetcode/_2/Main.java[`add two numbers`] 两数相加
+3. link:./leetcode/src/main/java/fun/onysakura/algorithm/leetcode/_3/Main.java[`longest substring without repeating characters`] 无重复字符的最长子串
 
-.utilities
-1. link:./utilities/src/main/java/com/onysakura/algorithm/utilities/db/sqlite/SQLite.java[`SQLite`] SQLite工具
-2. link:./utilities/src/main/java/com/onysakura/algorithm/utilities/db/mysql/MySQL.java[`MySQL`] MySQL工具
+.utils
+1. link:./utils/src/main/java/fun/onysakura/algorithm/utils/db/sqlite/SQLite.java[`SQLite`] SQLite工具
+2. link:./utils/src/main/java/fun/onysakura/algorithm/utils/db/mysql/MySQL.java[`MySQL`] MySQL工具
 
-.tools
-1. link:./tools/src/main/java/com/onysakura/algorithm/file/text/generator/CodeGenerator.java[`CodeGenerator`] 实体类代码生成
+.kits
+1. link:./kits/single/src/main/java/fun/onysakura/algorithm/kits/single/file/text/generator/database/DatabaseGenerator.java[`DatabaseGenerator`] 实体类代码生成

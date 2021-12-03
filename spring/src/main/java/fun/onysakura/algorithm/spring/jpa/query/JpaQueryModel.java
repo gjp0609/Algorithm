@@ -15,7 +15,7 @@ public class JpaQueryModel {
 
     @Id
     @GeneratedValue(generator = "idGenerator")
-    @GenericGenerator(name = "idGenerator", strategy = "com.onysakura.algorithm.spring.jpa.id.IdGenerator")
+    @GenericGenerator(name = "idGenerator", strategy = "fun.onysakura.algorithm.spring.jpa.id.IdGenerator")
     private Long id;
     @Column(columnDefinition = "varchar(200)")
     private String str;
