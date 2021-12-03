@@ -13,6 +13,7 @@
         <module>core</module>
         <module>leetcode</module>
         <module>kits</module>
+        <module>spring</module>
         <module>utils-core</module>
         <module>utils</module>
     </modules>
@@ -57,6 +58,11 @@
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>

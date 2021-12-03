@@ -1,0 +1,40 @@
+<html lang="zh">
+<header>
+    <script src="./lib/jquery.min.js"></script>
+</header>
+<body>
+<h1>Wechat</h1>
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+    let jsApiList = ['updateAppMessageShareData'];
+    $.ajax({
+        url: '/share?wechat=mine&url=' + encodeURIComponent(location.href.split('#')[0]),
+        type: "GET",
+        success: result => {
+            wx.config({
+                debug: false,
+                appId: result.appId,
+                timestamp: result.timestamp,
+                nonceStr: result.nonceStr,
+                signature: result.signature,
+                jsApiList: jsApiList
+            });
+            wx.ready(function () {
+                wx.updateAppMessageShareData({
+                    title: 'title', // 分享标题
+                    desc: 'desc', // 分享描述
+                    link: 'http://spring.algorithm.onysakura.com/files/wechat.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: 'http:/sei.easier.cn/sumitomo/static/checkIn/logo.jpg', // 分享图标
+                    success: function () {
+                        // 设置成功
+                    }
+                });
+            });
+            wx.error(function (res) {
+                alert('error: ' + JSON.stringify(res))
+            });
+        }
+    })
+</script>
+</html>

@@ -2,7 +2,7 @@
 <configuration debug="false" scan="false">
 
     <!-- 声明变量 -->
-    <property name="logPath" value="/Files/Logs/Mine/Algorithm/"/>
+    <property name="logPath" value="/Files/Logs/Onysakura/Algorithm/"/>
     <property name="applicationName" value="utils-core"/>
     <timestamp key="month" datePattern="yyyyMM"/>
     <timestamp key="time" datePattern="yyyyMMdd_HHmmss"/>
