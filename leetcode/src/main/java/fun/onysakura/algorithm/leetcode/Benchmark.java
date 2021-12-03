@@ -1,11 +1,10 @@
-package fun.onysakura.algorithm.utils.core.basic;
+package fun.onysakura.algorithm.leetcode;
 
 import java.util.HashMap;
 
 public class Benchmark {
 
     private static final ThreadLocal<HashMap<String, Long>> threadLocal = new ThreadLocal<>();
-    private static final double NANO_TO_MILLI = 1000000D;
 
     public static void init() {
         threadLocal.set(new HashMap<>());
@@ -20,13 +19,8 @@ public class Benchmark {
     public static void end() {
         threadLocal.get().put("endTime", System.nanoTime());
         long timeUsage = threadLocal.get().get("endTime") - threadLocal.get().get("startTime");
-        double timeUsageInDouble = timeUsage / NANO_TO_MILLI;
+        double timeUsageInDouble = timeUsage / 1000000D;
         System.out.println("\033[35m " + threadLocal.get().get("count") + ". time usage: " + timeUsageInDouble + "ms\033[0m");
     }
 
-    public static double endWithoutPrint() {
-        threadLocal.get().put("endTime", System.nanoTime());
-        long timeUsage = threadLocal.get().get("endTime") - threadLocal.get().get("startTime");
-        return timeUsage / NANO_TO_MILLI;
-    }
 }
