@@ -8,8 +8,9 @@
         <version>0.1</version>
     </parent>
 
-    <artifactId>utils-core</artifactId>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>utils-core</artifactId>
+    <version>0.1</version>
     <packaging>jar</packaging>
 
     <dependencies>
