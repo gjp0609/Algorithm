@@ -1,0 +1,7 @@
+webDriver:
+  filePath: C:\Files\Data\WebDrivers\msedgedriver.exe
+  type: edge
+  headless: true
+oa:
+  user: xx001
+  password: 123456
