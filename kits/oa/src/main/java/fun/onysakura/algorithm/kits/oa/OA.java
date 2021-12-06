@@ -21,11 +21,11 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.util.Objects;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -103,7 +103,12 @@ public class OA {
             log.warn("can't find config file, use default");
         }
         if (inputStream == null) {
-            inputStream = OA.class.getClassLoader().getResourceAsStream("config.yml");
+            try {
+                inputStream = new FileInputStream(Paths.get("kits", "oa", "src", "main", "resources", "config.yml").toFile());
+            } catch (FileNotFoundException e) {
+                log.warn("can't find default config file, exit");
+                System.exit(0);
+            }
         }
         JSONObject json = yaml.loadAs(inputStream, JSONObject.class);
         JSONObject oa = json.getJSONObject("oa");
@@ -113,12 +118,6 @@ public class OA {
         JSONObject webDriver = json.getJSONObject("webDriver");
         String driverFilePath = webDriver.getString("filePath");
         boolean headless = Objects.requireNonNullElse(webDriver.getBoolean("headless"), true);
-        int x = new Random().nextInt();
-        switch (x) {
-            case 1 -> System.out.println(1);
-            case 2 -> System.out.println(2);
-            default -> throw new RuntimeException("sad");
-        }
         switch (Objects.requireNonNull(webDriver.getString("type"))) {
             case "chrome" -> {
                 System.setProperty("webdriver.chrome.driver", driverFilePath);
