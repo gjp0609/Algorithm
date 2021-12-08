@@ -54,7 +54,7 @@ public class KeywordFilter {
             }
             // 先根据首位字符获取子树
             // 直接传输完整的屏蔽词列表会导致性能下降
-            // getMatch(this.text, i, DFA_MAP, "");
+            // getMatch(blockWords, text, i, BLOCK_WORD_MAP, "");
             char c = text.charAt(i);
             Object o = BLOCK_WORD_MAP.get(c);
             if (o != null) {
