@@ -36,7 +36,6 @@ public class KeywordFilterTest {
         KeywordFilter.init(Arrays.asList("一二三", "一二三四五", "三四五"));
         String s = "aaaa一二三四五aaa";
         List<String> keywords = KeywordFilter.match(s);
-        System.out.println(KeywordFilter.BLOCK_WORD_MAP);
         System.out.println(s);
         System.out.println(keywords);
     }

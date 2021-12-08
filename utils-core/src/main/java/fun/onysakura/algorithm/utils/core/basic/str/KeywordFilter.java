@@ -15,7 +15,7 @@ public class KeywordFilter {
     /**
      * 屏蔽词拆分树
      */
-    public static ConcurrentHashMap<Character, Object> BLOCK_WORD_MAP;
+    private static ConcurrentHashMap<Character, Object> BLOCK_WORD_MAP;
 
     /**
      * 初始化屏蔽词
@@ -29,7 +29,6 @@ public class KeywordFilter {
         BLOCK_WORD_MAP = new ConcurrentHashMap<>(blockWords.size() / 2);
         blockWords.forEach(blockWord -> init(blockWord, 0, BLOCK_WORD_MAP));
     }
-
 
     private static void init(String blockWord, int index, ConcurrentHashMap<Character, Object> map) {
         Object o = map.get(blockWord.charAt(index));
@@ -46,7 +45,6 @@ public class KeywordFilter {
             hashMap.put('\t', true);
         }
     }
-
 
     public static List<String> match(String text) {
         List<String> blockWords = new ArrayList<>();
@@ -70,7 +68,7 @@ public class KeywordFilter {
         return blockWords;
     }
 
-    public static void getMatch(List<String> blockWords, String text, int index, ConcurrentHashMap<Character, Object> dfaMap, String key) {
+    private static void getMatch(List<String> blockWords, String text, int index, ConcurrentHashMap<Character, Object> dfaMap, String key) {
         for (int i = index; i < text.length(); i++) {
             char c = text.charAt(i);
             Object o = dfaMap.get(c);
