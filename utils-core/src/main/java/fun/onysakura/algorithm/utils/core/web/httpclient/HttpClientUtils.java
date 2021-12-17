@@ -78,8 +78,16 @@ public class HttpClientUtils {
         return post(httpUrl, null);
     }
 
+    public static ResponseResult put(String httpUrl, PostParam postParam) throws Exception {
+        return post(httpUrl, postParam, "PUT");
+    }
+
     public static ResponseResult post(String httpUrl, PostParam postParam) throws Exception {
-        log.info("---------- POST: {}", httpUrl);
+        return post(httpUrl, postParam, "POST");
+    }
+
+    public static ResponseResult post(String httpUrl, PostParam postParam, String method) throws Exception {
+        log.info("---------- {}: {}", method, httpUrl);
         log.info("params: {}", JSON.toJSONString(postParam));
         long startTime = System.currentTimeMillis();
         if (postParam == null) {
@@ -107,7 +115,7 @@ public class HttpClientUtils {
         try {
             URL url = new URL(httpUrl);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
+            connection.setRequestMethod(method);
             connection.setConnectTimeout(postParam.getConnectTimeout());
             connection.setReadTimeout(postParam.getReadTimeout());
             // 默认值为：false，当向远程服务器传送数据/写数据时，需要设置为true

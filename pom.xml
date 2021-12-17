@@ -112,6 +112,11 @@
                 <version>8.0.23</version>
             </dependency>
             <dependency>
+                <groupId>org.ansj</groupId>
+                <artifactId>ansj_seg</artifactId>
+                <version>5.1.1</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.12.0</version>
