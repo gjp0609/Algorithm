@@ -6,6 +6,7 @@ public enum FtlTemplate {
     Mapper,
     MapperXml,
     pcr,
+    pcr_html,
     ;
 
 }

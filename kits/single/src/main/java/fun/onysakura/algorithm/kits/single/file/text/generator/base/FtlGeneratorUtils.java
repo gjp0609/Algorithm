@@ -11,7 +11,7 @@ import java.io.OutputStreamWriter;
 public class FtlGeneratorUtils {
 
     private static final String TEMPLATE_PATH = "kits/single/src/main/resources/template";
-    private static final String OUTPUT_PATH = "kits/single/src/main/resources/output";
+    public static final String OUTPUT_PATH = "kits/single/src/main/resources/output";
     private static final Configuration configuration;
 
     static {
