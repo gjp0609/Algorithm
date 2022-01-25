@@ -1,5 +1,6 @@
 package fun.onysakura.algorithm.kits.single.file.text.generator;
 
+import fun.onysakura.algorithm.kits.single.Constants;
 import fun.onysakura.algorithm.kits.single.file.text.generator.base.FtlGeneratorUtils;
 import fun.onysakura.algorithm.kits.single.file.text.generator.base.FtlTemplate;
 import org.apache.commons.io.FileUtils;
@@ -113,7 +114,7 @@ public class PcrReader {
     }
 
     private static void initData() throws Exception {
-        File file = new File(FtlGeneratorUtils.OUTPUT_PATH + "/pcr/wiki-2022-01-06.html");
+        File file = new File(Constants.OUTPUT_PATH + "/pcr/wiki-2022-01-06.html");
         Document document;
         if (file.exists()) {
             document = Jsoup.parse(file, StandardCharsets.UTF_8.name());
@@ -141,7 +142,7 @@ public class PcrReader {
             hashMap.put("name", name);
             hashMap.put("nickname", nickname);
             hashMap.put("img", img);
-            File image = new File(FtlGeneratorUtils.OUTPUT_PATH + "/pcr/images/" + key + ".png");
+            File image = new File(Constants.OUTPUT_PATH + "/pcr/images/" + key + ".png");
             if (!image.exists()) {
                 Thread.sleep(50);
                 HttpRequest request = HttpRequest.newBuilder()
@@ -153,7 +154,7 @@ public class PcrReader {
                 InputStream body = response.body();
                 FileUtils.copyToFile(body, image);
             }
-            image = new File(FtlGeneratorUtils.OUTPUT_PATH + "/pcr/images/" + key + ".png");
+            image = new File(Constants.OUTPUT_PATH + "/pcr/images/" + key + ".png");
             String base64 = new String(Base64.getEncoder().encode(new FileInputStream(image).readAllBytes()), StandardCharsets.UTF_8);
             hashMap.put("imgSrc", base64);
             WIKI_DATA.put(key, hashMap);
