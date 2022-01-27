@@ -1,6 +1,5 @@
 package fun.onysakura.algorithm.kits.single.file.image;
 
-import com.alibaba.fastjson.JSON;
 import com.benjaminwan.ocrlibrary.OcrResult;
 import fun.onysakura.algorithm.kits.single.Constants;
 import fun.onysakura.algorithm.utils.db.anno.ColumnName;
@@ -21,15 +20,16 @@ public class TextSearchImage {
     private static final String DB_PATH = Constants.OUTPUT_PATH + "/imageText.db";
     private static final BaseRepository<ImageText> REPOSITORY;
 
+    private static final HashSet<String> SKIP = new HashSet<>();
+
     static {
         SQLite.open(DB_PATH);
         REPOSITORY = new BaseRepository<>(ImageText.class);
+        SKIP.add("skip.jpg");
     }
 
     public static void main(String[] args) throws Exception {
         check(dir);
-        List<ImageText> imageTexts = REPOSITORY.selectAll();
-        System.out.println(JSON.toJSONString(imageTexts));
     }
 
     public static void check(String dir) throws Exception {
@@ -42,7 +42,7 @@ public class TextSearchImage {
                 } else {
                     String fileName = file.getName();
                     int lastIndexOf = fileName.lastIndexOf(".");
-                    if (lastIndexOf > 0 && format.contains(fileName.substring(lastIndexOf))) {
+                    if (lastIndexOf > 0 && format.contains(fileName.substring(lastIndexOf)) && !SKIP.contains(fileName)) {
                         List<ImageText> list = REPOSITORY.select(new ImageText(absolutePath, null));
                         if (list.isEmpty()) {
                             OcrResult result = OCRUtils.detect(absolutePath);
