@@ -9,6 +9,7 @@ import fun.onysakura.algorithm.utils.db.sqlite.SQLite;
 import lombok.Data;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class TextSearchImage {
 
     private static final String format = ".jpg.png";
-    private static final String dir = "C:/Files/Data/ScreenShot/Snipaste/auto/";
+    private static final String dir = "C:/Files/Temp/ocr/";
     private static final String DB_PATH = Constants.OUTPUT_PATH + "/imageText.db";
     private static final BaseRepository<ImageText> REPOSITORY;
 
