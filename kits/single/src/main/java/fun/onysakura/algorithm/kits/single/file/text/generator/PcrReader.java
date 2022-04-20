@@ -180,6 +180,7 @@ public class PcrReader {
         NAME_DICT_TW.put("萬聖忍 萬忍", "440+");
         NAME_DICT_CN.put("忍（万圣节）", "440+");
         NAME_DICT_CN.put("环奈（振袖）", "527+");
+        NAME_DICT_CN.put("步美（怪盗）", "590+");
         NAME_DICT_TW.put("泳裝鈴奈 泳爆 泳裝爆弓 水爆", "705+");
         NAME_DICT_CN.put("铃奈（夏日）", "705+");
         NAME_DICT_TW.put("泳裝伊緒 泳老師 水魅魔", "715+");
