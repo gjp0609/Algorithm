@@ -28,7 +28,7 @@
         <spring-cloud.version>2020.0.4</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
         <!-- Tools-->
-        <fastjson.version>1.2.75</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <commons-lang3.version>3.11</commons-lang3.version>
         <mysql-connector.version>8.0.23</mysql-connector.version>
         <mybatis-plus-starter.version>3.4.2</mybatis-plus-starter.version>
