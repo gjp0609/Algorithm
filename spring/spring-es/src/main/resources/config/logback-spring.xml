@@ -23,22 +23,16 @@
         </encoder>
     </appender>
 
-    <appender name="listen" class="fun.onysakura.algorithm.spring.log.ListenLogAppender"/>
-
     <!-- 设置本项目日志级别为 debug -->
-    <logger name="fun.onysakura" level="debug"/>
+    <logger name="fun.onysakura" level="ERROR"/>
 
     <!-- 屏蔽 nacos 心跳日志 -->
-    <logger name="com.alibaba.nacos.client" level="WARN" additivity="false">
-        <appender-ref ref="file"/>
-        <appender-ref ref="console"/>
-        <appender-ref ref="listen"/>
+    <logger name="org.elasticsearch.client.RestClient" level="WARN" additivity="false">
     </logger>
 
     <root level="info">
         <appender-ref ref="file"/>
         <appender-ref ref="console"/>
-        <appender-ref ref="listen"/>
     </root>
 
 </configuration>
